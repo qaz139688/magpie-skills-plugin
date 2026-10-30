@@ -1,0 +1,31 @@
+{
+  "name": "magpie-skills-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An independent Magpie page for labeling and controlling library skills on Windows.",
+  "type": "module",
+  "main": "./index.mjs",
+  "exports": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "lib",
+    "page"
+  ],
+  "scripts": {
+    "test": "bun test"
+  },
+  "magpie": {
+    "page": {
+      "title": "Skills Management",
+      "titles": {
+        "zh": "技能管理"
+      },
+      "file": "page/boot.html",
+      "icon": "page/icon.svg",
+      "service": {
+        "port": 3487,
+        "option": "port"
+      }
+    }
+  }
+}

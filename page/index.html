@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Skills Management</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <aside class="rail" aria-label="Skill views">
+      <div class="rail-head">
+        <div class="rail-mark" aria-hidden="true" id="rail-mark"></div>
+        <div class="rail-heading">
+          <h1 id="app-title">Skills</h1>
+          <p id="app-subtitle">Labels and Windows agents</p>
+        </div>
+      </div>
+
+      <nav class="view-nav" id="view-nav" aria-label="Skill views"></nav>
+
+      <div class="rail-section-head">
+        <span id="labels-heading">Labels</span>
+        <button class="icon-button" type="button" id="new-label" aria-label="New label" title="New label">
+          <span class="icon-slot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="label-nav" id="label-nav"></div>
+
+      <div class="rail-foot">
+        <div class="rail-status" id="rail-status">Loading</div>
+        <button class="quiet-button" type="button" id="refresh-rail" data-action="refresh">
+          <span class="icon-slot" aria-hidden="true"></span>
+          <span id="refresh-rail-label">Refresh</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div class="title-block">
+          <h2 id="view-title">All skills</h2>
+          <p id="view-count">Loading skills</p>
+        </div>
+        <div class="toolbar">
+          <label class="search-field">
+            <span class="icon-slot search-icon" aria-hidden="true"></span>
+            <input id="search" type="search" autocomplete="off" spellcheck="false" placeholder="Search name or description">
+            <kbd>/</kbd>
+          </label>
+          <button class="quiet-button refresh-top" type="button" id="refresh-top" data-action="refresh">
+            <span class="icon-slot" aria-hidden="true"></span>
+            <span id="refresh-top-label">Refresh</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="banners" id="banners" aria-live="polite"></div>
+      <section class="skill-list" id="skill-list" aria-live="polite" aria-busy="true"></section>
+
+      <footer class="workspace-foot">
+        <span id="foot-note">Assignments are applied through Magpie. Shared-folder skills may remain available outside its control.</span>
+        <span class="foot-meta" id="foot-meta"></span>
+      </footer>
+    </main>
+  </div>
+
+  <dialog class="sheet" id="label-dialog" aria-labelledby="label-dialog-title">
+    <form class="sheet-form" id="label-form">
+      <div class="sheet-head">
+        <div>
+          <h2 id="label-dialog-title">New label</h2>
+          <p id="label-dialog-note">Group skills without changing their files or assignments.</p>
+        </div>
+        <button class="icon-button" type="button" data-close="label-dialog" aria-label="Close">
+          <span class="icon-slot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <label class="field">
+        <span id="label-name-label">Label name</span>
+        <input id="label-name-input" name="name" type="text" maxlength="40" autocomplete="off" required>
+      </label>
+      <p class="field-hint" id="label-name-hint">Use a short name. Labels are case-insensitive for duplicates.</p>
+      <p class="form-error" id="label-form-error" role="alert"></p>
+      <div class="sheet-actions">
+        <button class="quiet-button" type="button" data-close="label-dialog" id="label-cancel">Cancel</button>
+        <button class="primary-button" type="button" id="label-save">Create label</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="sheet sheet-wide" id="skill-labels-dialog" aria-labelledby="skill-labels-title">
+    <form class="sheet-form" id="skill-labels-form">
+      <div class="sheet-head">
+        <div>
+          <h2 id="skill-labels-title">Edit labels</h2>
+          <p id="skill-labels-note"></p>
+        </div>
+        <button class="icon-button" type="button" data-close="skill-labels-dialog" aria-label="Close">
+          <span class="icon-slot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="check-list" id="skill-label-options"></div>
+      <p class="form-error" id="skill-labels-error" role="alert"></p>
+      <div class="sheet-actions split">
+        <button class="quiet-button" type="button" id="create-label-from-sheet">
+          <span class="icon-slot" aria-hidden="true"></span>
+          <span id="create-label-from-sheet-label">New label</span>
+        </button>
+        <span class="action-group">
+          <button class="quiet-button" type="button" data-close="skill-labels-dialog" id="skill-labels-cancel">Cancel</button>
+          <button class="primary-button" type="button" id="skill-labels-save">Save labels</button>
+        </span>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="sheet sheet-small" id="confirm-dialog" aria-labelledby="confirm-title">
+    <form class="sheet-form" id="confirm-form">
+      <div class="sheet-head">
+        <div>
+          <h2 id="confirm-title">Delete label?</h2>
+          <p id="confirm-note"></p>
+        </div>
+      </div>
+      <p class="confirm-copy" id="confirm-copy"></p>
+      <div class="sheet-actions">
+        <button class="quiet-button" type="button" data-close="confirm-dialog" id="confirm-cancel">Cancel</button>
+        <button class="danger-button" type="button" id="confirm-delete">Delete label</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
