@@ -1,8 +1,18 @@
 # Implementation Notes
 
+> The experience upgrade is implemented in the workspace and verified in an
+> isolated harness. The live Magpie page has not been reloaded with it; see
+> [experience-upgrade-plan.md](experience-upgrade-plan.md).
+>
+> Start with [01-项目定位与范围.md](01-项目定位与范围.md),
+> [02-架构与执行说明.md](02-架构与执行说明.md), and
+> [03-状态与迭代计划.md](03-状态与迭代计划.md). This file records
+> implementation evidence rather than defining the current product scope.
+
 Date: 2026-10-30 (Asia/Shanghai)
-Status: implemented and formally installed in the live Magpie profile; live
-page load verified.
+Status: the baseline is installed in the live Magpie profile and its original
+page load was verified. The current upgrade is implemented and verified in
+isolation; live reload with the upgrade is still pending.
 
 ## Delivered boundary
 
@@ -35,7 +45,9 @@ it only in the `X-Magpie-Page` header, not in their URLs.
 
 ### Windows agent eligibility
 
-`magpie ls` is parsed into a fixed display-name catalog for Magpie 0.1.2115.
+`magpie ls` is parsed into a fixed display-name catalog. The local Magpie CLI
+reported `0.1.2169` on 2026-10-30; this catalog must be rechecked after future
+Magpie upgrades.
 The parser excludes WSL rows, `not detected` rows, and `CLI not found` rows.
 Only agents with a known user-wide Skills location are eligible. Unknown
 detected names produce a warning and are not assignable.
@@ -61,14 +73,30 @@ array, never a shell string. The service:
 Plugin writes are serialized and bounded. The plugin does not claim
 cross-writer atomicity with the original Library.
 
+### Toggle responsiveness
+
+Global skill association writes now use the existing discovery cache instead
+of forcing `magpie ls` on every click. The page applies the intended state
+immediately and marks the affected Agent as applying. Single-agent intents
+are coalesced for 120 ms and, if the user changes the intent during a write,
+the final intent is sent after the current request completes.
+
+Global toggles also update their visible target immediately, but remain
+single-flight for that skill. Failed writes restore the previous UI state and
+surface the error. See ADR 0009.
+
 ### Authentication
 
 The page sends its Magpie page capability in `X-Magpie-Page`. State-changing
 requests also require a short-lived `X-Magpie-Session` token. The service
 accepts only loopback Host values and `Origin: null` or no Origin, and exposes
 CORS only for a sandboxed Magpie page. Tokens are kept in headers, not URLs.
+Persisted capability and bootstrap files use Windows ACLs restricted to the
+current user; startup fails closed if the ACL cannot be applied.
 
 ## Verification completed
+
+The following baseline checks were recorded at the original delivery:
 
 - `bun test`: 17 passing tests across 5 files.
 - Impeccable mechanical detector: no findings for the page, styles, or client.
@@ -91,9 +119,49 @@ CORS only for a sandboxed Magpie page. Tokens are kept in headers, not URLs.
 
 ## Current state
 
-The plugin is installed in the live Magpie profile. The manager page is
-available from **Plugins -> Skills Management**. No skill association or label
-was changed during installation verification. Opening the page may trigger a
-real Windows agent discovery; assignment writes happen only when a control is
-clicked, and every write is still delegated to Magpie's CLI and verified by a
-fresh library read.
+The original plugin is installed in the live Magpie profile. The experience
+upgrade is implemented in this workspace and verified in an isolated harness;
+the live profile has not been reloaded with the upgrade.
+
+## Experience upgrade implementation
+
+The upgrade adds:
+
+- Magpie agent artwork with image/mask rendering by agent.
+- Rounded skill cards, exact-name copy, Library-folder opening, native source
+  links, GitHub owner avatars, and custom source URLs.
+- A Projects rail. Native project views are read-only; adding a skill through
+  a skill's project menu uses the controlled native writer. Plugin projects
+  use explicitly owned Windows Junctions and do not change global assignments.
+- Native-project removal changes only currently eligible project agents. Hidden
+  or unsupported assignments remain intact, and the menu no longer treats a
+  hidden-only assignment as active.
+- Runtime service capability delivery through a protected bootstrap script.
+
+`features.json` owns custom source URLs and plugin project records. It is
+separate from labels and native `library.json`. Project writes reject foreign
+folders, overlapping native projects, unsupported agents, redirected paths,
+and unverified links.
+
+## Upgrade verification
+
+- `bun test`: 30 passing tests across 9 files after the A+B change.
+- `impeccable detect`: no findings for the changed page files.
+- Isolated browser harness: desktop card layout, source avatar, custom source,
+  copy action, project navigation, native-project read-only view, project
+  all-on, project removal, the add-to-project menu, joined-project checkmarks
+  and removal, and 420px narrow layout were exercised.
+- Copy check: the Windows clipboard contained the exact name `pdf`.
+- Project check: project all-on created verified Junctions at
+  `.agents/skills/pdf` and `.claude/skills/pdf`; removal left the project
+  folder and Library skill intact.
+- Native-project check: removing a joined skill removed the eligible project
+  agents while preserving a pre-existing hidden assignment.
+- Source check: a source click opened the expected GitHub URL in the system
+  browser.
+- Startup check: the service published a runtime capability file outside
+  public static routes; the exact capability authorized state reads.
+
+The live Magpie page has not yet been restarted or verified against the
+upgrade. Opening the existing live page before a Magpie/plugin restart may
+still show the prior implementation.

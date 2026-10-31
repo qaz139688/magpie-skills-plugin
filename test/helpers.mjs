@@ -12,10 +12,10 @@ export function tempConfig() {
   };
 }
 
-export function writeLibrary(configDir, skills) {
+export function writeLibrary(configDir, skills, extra = {}) {
   fs.writeFileSync(
     path.join(configDir, "library.json"),
-    `${JSON.stringify({ skills }, null, 2)}\n`,
+    `${JSON.stringify({ skills, ...extra }, null, 2)}\n`,
     "utf8"
   );
 }
@@ -35,6 +35,7 @@ export function writeSkill(configDir, name, description = "") {
 }
 
 export function fakeDiscovery(agents, overrides = {}) {
+  const refreshCalls = [];
   let current = {
     state: "ready",
     agents,
@@ -51,7 +52,8 @@ export function fakeDiscovery(agents, overrides = {}) {
         agents: current.agents.map((agent) => ({ ...agent }))
       };
     },
-    async refresh() {
+    async refresh(options = {}) {
+      refreshCalls.push({ ...options });
       return this.snapshot();
     },
     async ensureFresh() {
@@ -59,7 +61,8 @@ export function fakeDiscovery(agents, overrides = {}) {
     },
     set(next) {
       current = { ...current, ...next };
-    }
+    },
+    refreshCalls
   };
 }
 
@@ -76,7 +79,7 @@ export async function makeRequest(
   {
     path: requestPath,
     method = "GET",
-    pageToken = "a".repeat(32),
+    pageToken = service.pageCapability || "a".repeat(64),
     session = "",
     body = undefined,
     origin = "null",

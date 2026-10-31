@@ -1,7 +1,8 @@
 # ADR 0005: Add an Independent Skills Management Page
 
 Date: 2026-10-29
-Status: accepted for page placement and existing-Library boundary.
+Status: accepted for page placement and existing-Library boundary. The
+historical design-only notes below are retained for context.
 
 ## Context
 

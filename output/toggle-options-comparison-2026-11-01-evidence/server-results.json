@@ -1,0 +1,510 @@
+{
+  "baseline": {
+    "scenario": "baseline",
+    "discovery": [
+      {
+        "ms": 2219,
+        "requestedAt": "2026-10-31T15:55:06.666Z"
+      },
+      {
+        "ms": 5259,
+        "requestedAt": "2026-10-31T15:55:45.449Z"
+      },
+      {
+        "ms": 2451,
+        "requestedAt": "2026-10-31T15:56:05.281Z"
+      },
+      {
+        "ms": 2891,
+        "requestedAt": "2026-10-31T15:56:11.465Z"
+      },
+      {
+        "ms": 3202,
+        "requestedAt": "2026-10-31T15:56:17.055Z"
+      },
+      {
+        "ms": 2218,
+        "requestedAt": "2026-10-31T15:59:10.117Z"
+      },
+      {
+        "ms": 3205,
+        "requestedAt": "2026-10-31T15:59:13.422Z"
+      },
+      {
+        "ms": 2403,
+        "requestedAt": "2026-10-31T15:59:23.773Z"
+      }
+    ],
+    "writes": [
+      {
+        "ms": 3136,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2285,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2588,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2443,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 3045,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      }
+    ],
+    "mutations": [
+      {
+        "path": "/api/session",
+        "ms": 46,
+        "at": "2026-10-31T15:55:40.164Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 5631,
+        "at": "2026-10-31T15:56:08.421Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 5180,
+        "at": "2026-10-31T15:56:13.753Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 5794,
+        "at": "2026-10-31T15:56:19.645Z"
+      },
+      {
+        "path": "/api/session",
+        "ms": 1,
+        "at": "2026-10-31T15:59:07.894Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 5654,
+        "at": "2026-10-31T15:59:15.869Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 5452,
+        "at": "2026-10-31T15:59:26.82Z"
+      }
+    ]
+  },
+  "A-cache": {
+    "scenario": "A-cache",
+    "discovery": [
+      {
+        "ms": 1747,
+        "requestedAt": "2026-10-31T15:55:08.441Z"
+      },
+      {
+        "ms": 3982,
+        "requestedAt": "2026-10-31T15:56:31.883Z"
+      },
+      {
+        "ms": 3201,
+        "requestedAt": "2026-10-31T15:56:53.822Z"
+      }
+    ],
+    "writes": [
+      {
+        "ms": 2229,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 4437,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2439,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      }
+    ],
+    "mutations": [
+      {
+        "path": "/api/session",
+        "ms": 2,
+        "at": "2026-10-31T15:56:27.838Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 5477,
+        "at": "2026-10-31T15:56:56.054Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 4441,
+        "at": "2026-10-31T15:57:00.602Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 2442,
+        "at": "2026-10-31T15:57:03.186Z"
+      }
+    ]
+  },
+  "B-feedback": {
+    "scenario": "B-feedback",
+    "discovery": [
+      {
+        "ms": 1954,
+        "requestedAt": "2026-10-31T15:55:10.426Z"
+      },
+      {
+        "ms": 2627,
+        "requestedAt": "2026-10-31T15:57:44.607Z"
+      },
+      {
+        "ms": 1702,
+        "requestedAt": "2026-10-31T15:57:46.686Z"
+      },
+      {
+        "ms": 1734,
+        "requestedAt": "2026-10-31T15:57:51.191Z"
+      },
+      {
+        "ms": 1669,
+        "requestedAt": "2026-10-31T15:57:55.871Z"
+      },
+      {
+        "ms": 2200,
+        "requestedAt": "2026-10-31T15:58:46.755Z"
+      },
+      {
+        "ms": 2690,
+        "requestedAt": "2026-10-31T15:58:49.663Z"
+      }
+    ],
+    "writes": [
+      {
+        "ms": 2567,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2809,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2464,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2065,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ],
+        "stderrBytes": 0
+      }
+    ],
+    "mutations": [
+      {
+        "path": "/api/session",
+        "ms": 80,
+        "at": "2026-10-31T15:57:41.973Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 4272,
+        "at": "2026-10-31T15:57:49.255Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 4546,
+        "at": "2026-10-31T15:57:54.002Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 4137,
+        "at": "2026-10-31T15:57:58.338Z"
+      },
+      {
+        "path": "/api/session",
+        "ms": 32,
+        "at": "2026-10-31T15:58:44.543Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 4759,
+        "at": "2026-10-31T15:58:51.731Z"
+      }
+    ]
+  },
+  "A+B": {
+    "scenario": "A+B",
+    "discovery": [
+      {
+        "ms": 2172,
+        "requestedAt": "2026-10-31T15:55:12.641Z"
+      },
+      {
+        "ms": 2310,
+        "requestedAt": "2026-10-31T15:58:08.676Z"
+      },
+      {
+        "ms": 2213,
+        "requestedAt": "2026-10-31T15:58:50.699Z"
+      }
+    ],
+    "writes": [
+      {
+        "ms": 2380,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2144,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2283,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "ms": 2520,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ],
+        "stderrBytes": 0
+      }
+    ],
+    "mutations": [
+      {
+        "path": "/api/session",
+        "ms": 1,
+        "at": "2026-10-31T15:58:06.324Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 2388,
+        "at": "2026-10-31T15:58:11.453Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 2147,
+        "at": "2026-10-31T15:58:13.805Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 2286,
+        "at": "2026-10-31T15:58:16.306Z"
+      },
+      {
+        "path": "/api/session",
+        "ms": 1,
+        "at": "2026-10-31T15:58:48.477Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 2522,
+        "at": "2026-10-31T15:58:53.427Z"
+      }
+    ]
+  },
+  "resident-sidecar": {
+    "scenario": "resident-sidecar",
+    "discovery": [],
+    "writes": [
+      {
+        "ms": 1250,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ]
+      },
+      {
+        "ms": 722,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ]
+      },
+      {
+        "ms": 610,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ]
+      },
+      {
+        "ms": 1060,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ]
+      },
+      {
+        "ms": 1170,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ]
+      },
+      {
+        "ms": 1088,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ]
+      },
+      {
+        "ms": 870,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ]
+      },
+      {
+        "ms": 545,
+        "skillName": "alpha",
+        "agentIds": [
+          "opencode"
+        ]
+      },
+      {
+        "ms": 582,
+        "skillName": "alpha",
+        "agentIds": [
+          "codex",
+          "opencode"
+        ]
+      }
+    ],
+    "mutations": [
+      {
+        "path": "/api/session",
+        "ms": 1,
+        "at": "2026-10-31T15:58:24.582Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 1258,
+        "at": "2026-10-31T15:58:26.238Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 726,
+        "at": "2026-10-31T15:58:27.209Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 613,
+        "at": "2026-10-31T15:58:28.021Z"
+      },
+      {
+        "path": "/api/session",
+        "ms": 1,
+        "at": "2026-10-31T15:58:52.341Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 1066,
+        "at": "2026-10-31T15:58:53.638Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 1173,
+        "at": "2026-10-31T15:58:54.824Z"
+      },
+      {
+        "path": "/api/session",
+        "ms": 1,
+        "at": "2026-10-31T15:59:40.584Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 1098,
+        "at": "2026-10-31T15:59:42.288Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 872,
+        "at": "2026-10-31T15:59:43.174Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 555,
+        "at": "2026-10-31T15:59:59.711Z"
+      },
+      {
+        "path": "/api/skills/alpha/agents",
+        "ms": 585,
+        "at": "2026-10-31T16:00:00.308Z"
+      }
+    ]
+  }
+}

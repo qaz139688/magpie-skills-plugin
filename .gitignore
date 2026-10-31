@@ -2,3 +2,4 @@ node_modules/
 dist/
 *.log
 .skills-manager-test/
+page/.service-capability-*.js

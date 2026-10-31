@@ -24,14 +24,24 @@ describe("library projection", () => {
           description: "Read PDFs well",
           assignedAgents: ["codex", "hidden"],
           offHere: false,
-          sourceLabel: ""
+          sourceURL: "",
+          sourceOwner: "",
+          sourceKind: "unknown",
+          sourceLabel: "",
+          customSource: false,
+          canEditSource: true
         },
         {
           name: "plain",
           description: "Plain skill",
           assignedAgents: [],
           offHere: false,
-          sourceLabel: ""
+          sourceURL: "",
+          sourceOwner: "",
+          sourceKind: "unknown",
+          sourceLabel: "",
+          customSource: false,
+          canEditSource: true
         }
       ]);
       expect(Object.keys(projected[0])).not.toContain("source");

@@ -1,11 +1,16 @@
 # Personal Magpie Skills Manager: Discovery
 
 Date: 2026-10-29 (Asia/Shanghai)
-Status: DESIGN ONLY. Requirements confirmed; further implementation and execution are not requested.
+Status: historical discovery notes. The baseline plugin is installed; the
+experience upgrade is implemented in the workspace and verified in isolation.
 
 > Implementation status (2026-10-30): the plugin has been implemented and
 > verified in isolation. The design-only wording below is retained as
 > historical context; see [implementation.md](implementation.md).
+
+> Current entry points: [01-项目定位与范围.md](01-项目定位与范围.md),
+> [02-架构与执行说明.md](02-架构与执行说明.md), and
+> [03-状态与迭代计划.md](03-状态与迭代计划.md).
 
 ## Requested outcomes
 

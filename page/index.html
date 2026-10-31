@@ -21,6 +21,14 @@
 
       <nav class="view-nav" id="view-nav" aria-label="Skill views"></nav>
 
+      <div class="rail-section-head project-section-head">
+        <span id="projects-heading">Projects</span>
+        <button class="icon-button" type="button" id="new-project" aria-label="Add project" title="Add project">
+          <span class="icon-slot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="project-nav" id="project-nav"></div>
+
       <div class="rail-section-head">
         <span id="labels-heading">Labels</span>
         <button class="icon-button" type="button" id="new-label" aria-label="New label" title="New label">
@@ -87,6 +95,64 @@
       <div class="sheet-actions">
         <button class="quiet-button" type="button" data-close="label-dialog" id="label-cancel">Cancel</button>
         <button class="primary-button" type="button" id="label-save">Create label</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="sheet" id="project-dialog" aria-labelledby="project-dialog-title">
+    <form class="sheet-form" id="project-form">
+      <div class="sheet-head">
+        <div>
+          <h2 id="project-dialog-title">Add project</h2>
+          <p id="project-dialog-note">Choose a local folder for project-specific skills.</p>
+        </div>
+        <button class="icon-button" type="button" data-close="project-dialog" aria-label="Close">
+          <span class="icon-slot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <label class="field">
+        <span id="project-name-label">Project name</span>
+        <input id="project-name-input" name="name" type="text" maxlength="80" autocomplete="off">
+      </label>
+      <label class="field">
+        <span id="project-path-label">Project folder</span>
+        <span class="path-field">
+          <input id="project-path-input" name="dir" type="text" autocomplete="off" spellcheck="false">
+          <button class="quiet-button" type="button" id="choose-project">Choose folder</button>
+        </span>
+      </label>
+      <p class="field-hint" id="project-hint">Adding a plugin project creates only its own Junctions. Native project settings stay untouched until you add a skill from a skill menu.</p>
+      <p class="form-error" id="project-form-error" role="alert"></p>
+      <div class="sheet-actions">
+        <button class="quiet-button" type="button" data-close="project-dialog" id="project-cancel">Cancel</button>
+        <button class="primary-button" type="button" id="project-save">Add project</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="sheet sheet-small" id="source-dialog" aria-labelledby="source-dialog-title">
+    <form class="sheet-form" id="source-form">
+      <div class="sheet-head">
+        <div>
+          <h2 id="source-dialog-title">Set source</h2>
+          <p id="source-dialog-note"></p>
+        </div>
+        <button class="icon-button" type="button" data-close="source-dialog" aria-label="Close">
+          <span class="icon-slot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <label class="field">
+        <span id="source-url-label">Source URL</span>
+        <input id="source-url-input" name="url" type="url" placeholder="https://" autocomplete="off">
+      </label>
+      <p class="field-hint" id="source-hint">Only an HTTP or HTTPS web address is accepted.</p>
+      <p class="form-error" id="source-form-error" role="alert"></p>
+      <div class="sheet-actions split">
+        <button class="quiet-button" type="button" id="source-clear">Clear source</button>
+        <span class="action-group">
+          <button class="quiet-button" type="button" data-close="source-dialog" id="source-cancel">Cancel</button>
+          <button class="primary-button" type="button" id="source-save">Save source</button>
+        </span>
       </div>
     </form>
   </dialog>

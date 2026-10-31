@@ -1,0 +1,16 @@
+[
+  {
+    "Plugins": false,
+    "CLIMeanMs": 791.5526500000001,
+    "WorkerMeanMs": 739.25679,
+    "Ratio": 1.0707411290737012,
+    "ReductionPercent": 6.606744352381366
+  },
+  {
+    "Plugins": true,
+    "CLIMeanMs": 2627.073875,
+    "WorkerMeanMs": 1287.81905,
+    "Ratio": 2.0399402190859033,
+    "ReductionPercent": 50.97895562605752
+  }
+]

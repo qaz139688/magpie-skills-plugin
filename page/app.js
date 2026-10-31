@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const PAGE_TOKEN_RE = /^[0-9a-f]{32}$/i;
+  const PAGE_TOKEN_RE = /^[0-9a-f]{64}$/i;
   const RETRYABLE_STATUS = new Set([0, 502, 503, 504]);
 
   const ICON_PATHS = {
@@ -25,6 +25,20 @@
     chevron: '<path d="m9 6 6 6-6 6"/>',
     folder:
       '<path d="M3.5 6.5h6l2 2h9v9.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 18V6.5Z"/>',
+    copy:
+      '<rect x="8" y="8" width="10" height="11" rx="1.5"/><path d="M6 15H5.5A1.5 1.5 0 0 1 4 13.5v-9A1.5 1.5 0 0 1 5.5 3h9A1.5 1.5 0 0 1 16 4.5V5"/>',
+    "folder-open":
+      '<path d="M3.5 7.5h6l2 2h8.5"/><path d="M4.2 19h14.6l1.7-7.5H5.9L4.2 19Z"/>',
+    external:
+      '<path d="M14 4h6v6"/><path d="m20 4-8.5 8.5"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>',
+    project:
+      '<path d="M3.5 6.5h6l2 2h9v9.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 18V6.5Z"/><path d="M8 13h8M12 10v6"/>',
+    link:
+      '<path d="M10 13.5a4 4 0 0 0 5.7.1l2.1-2.1a4 4 0 0 0-5.7-5.7l-1.2 1.2"/><path d="M14 10.5a4 4 0 0 0-5.7-.1l-2.1 2.1a4 4 0 0 0 5.7 5.7l1.2-1.2"/>',
+    globe:
+      '<circle cx="12" cy="12" r="8.5"/><path d="M3.8 12h16.4M12 3.5c2.1 2.3 3.2 5.2 3.2 8.5s-1.1 6.2-3.2 8.5c-2.1-2.3-3.2-5.2-3.2-8.5S9.9 5.8 12 3.5Z"/>',
+    remove:
+      '<path d="M5 7h14"/><path d="M9 7V4h6v3"/><path d="m7 7 1 13h8l1-13"/>',
     spark:
       '<path d="M12 3.5 13.5 9l5.5 1.5-5.5 1.5-1.5 5.5-1.5-5.5L5 10.5 10.5 9 12 3.5Z"/>'
   };
@@ -36,6 +50,67 @@
       allSkills: "All skills",
       untagged: "Untagged",
       labels: "Labels",
+      projects: "Projects",
+      addProject: "Add project",
+      noProjects: "No projects yet.",
+      projectCount: "{count} skills",
+      projectCountOne: "1 skill",
+      nativeProject: "Magpie project",
+      pluginProject: "Plugin project",
+      projectReadOnly: "Read-only here",
+      projectContext: "Project skills",
+      projectPath: "Folder: {path}",
+      projectReadOnlyHint:
+        "This project view is read-only. Use a skill's Add to project menu to add skills.",
+      projectSharedHint:
+        "Agents sharing a project skill folder may read the same placement.",
+      projectWarnings: "Project needs attention",
+      projectAddTitle: "Add project",
+      projectAddNote: "Choose a local folder for project-specific skills.",
+      projectName: "Project name",
+      projectPathLabel: "Project folder",
+      chooseFolder: "Choose folder",
+      projectHint:
+        "Adding a plugin project creates only its own Junctions. Native project settings stay untouched until you add a skill from a skill menu.",
+      projectAdded: "Project added.",
+      projectRemoved: "Project removed.",
+      projectRemoveTitle: "Remove project?",
+      projectRemoveBody:
+        "Remove {name}? Only Junctions owned by this plugin are removed. The folder, skills, and Magpie projects stay untouched.",
+      removeProject: "Remove project",
+      projectNameRequired: "Choose a project folder.",
+      projectSave: "Add project",
+      projectNoAgents: "No installed agent supports project skills.",
+      projectAgentEnable: "Add {agent} to {skill} in {project}",
+      projectAgentDisable: "Remove {agent} from {skill} in {project}",
+      projectAllOn: "Add every eligible agent to {skill} in {project}",
+      projectAllOff: "Remove every eligible agent from {skill} in {project}",
+      projectAppliedOn: "{skill} is added to every eligible project agent.",
+      projectAppliedOff: "{skill} is removed from every eligible project agent.",
+      projectAgentApplied: "{agent} was updated for {skill} in the project.",
+      copySkill: "Copy {skill}",
+      copied: "{skill} copied.",
+      copyFailed: "Could not copy the skill name.",
+      openFolder: "Open {skill} folder",
+      folderOpened: "Opened the skill folder.",
+      folderFailed: "Could not open the skill folder.",
+      openSource: "Open source for {skill}",
+      sourceOpened: "Opened the source in your browser.",
+      sourceMissing: "No web source is recorded.",
+      setSource: "Set source",
+      noSource: "No source recorded",
+      officialSource: "Official source",
+      customSource: "Custom source",
+      sourceReadonly: "The official source cannot be changed here.",
+      sourceSaved: "Source saved.",
+      sourceCleared: "Source cleared.",
+      sourceInvalid: "Enter a valid HTTP or HTTPS URL.",
+      sourceDialogTitle: "Set source",
+      sourceDialogNote: "Add a web address for {skill}.",
+      sourceUrl: "Source URL",
+      sourceHint: "Only an HTTP or HTTPS web address is accepted.",
+      clearSource: "Clear source",
+      saveSource: "Save source",
       newLabel: "New label",
       refresh: "Refresh",
       searchPlaceholder: "Search name or description",
@@ -141,6 +216,65 @@
       allSkills: "全部技能",
       untagged: "未分类",
       labels: "标签",
+      projects: "项目",
+      addProject: "添加项目",
+      noProjects: "还没有项目。",
+      projectCount: "{count} 个技能",
+      projectCountOne: "1 个技能",
+      nativeProject: "Magpie 项目",
+      pluginProject: "插件项目",
+      projectReadOnly: "此处只读",
+      projectContext: "项目技能",
+      projectPath: "文件夹：{path}",
+      projectReadOnlyHint: "此项目页保持只读；需要加入技能时，请使用技能上的“加入项目”菜单。",
+      projectSharedHint: "读取同一项目技能文件夹的 Agent 会看到同一份链接。",
+      projectWarnings: "项目需要处理",
+      projectAddTitle: "添加项目",
+      projectAddNote: "选择本地文件夹，为它单独启用技能。",
+      projectName: "项目名称",
+      projectPathLabel: "项目文件夹",
+      chooseFolder: "选择文件夹",
+      projectHint:
+        "添加插件项目时只创建它自己的 Junction；只有从技能菜单加入项目时，才会改动原生项目设置。",
+      projectAdded: "项目已添加。",
+      projectRemoved: "项目已移除。",
+      projectRemoveTitle: "移除项目？",
+      projectRemoveBody:
+        "移除 {name}？只会移除插件拥有的 Junction，项目文件夹、技能和 Magpie 项目都会保留。",
+      removeProject: "移除项目",
+      projectNameRequired: "请选择项目文件夹。",
+      projectSave: "添加项目",
+      projectNoAgents: "没有支持项目技能的已安装 Agent。",
+      projectAgentEnable: "在 {project} 中为 {skill} 添加 {agent}",
+      projectAgentDisable: "从 {project} 的 {skill} 移除 {agent}",
+      projectAllOn: "在 {project} 中为 {skill} 添加全部可用 Agent",
+      projectAllOff: "从 {project} 的 {skill} 移除全部可用 Agent",
+      projectAppliedOn: "{skill} 已添加到全部可用项目 Agent。",
+      projectAppliedOff: "{skill} 已从全部可用项目 Agent 移除。",
+      projectAgentApplied: "{project} 中的 {skill} 已更新 {agent}。",
+      copySkill: "复制 {skill}",
+      copied: "{skill} 已复制。",
+      copyFailed: "复制技能名称失败。",
+      openFolder: "打开 {skill} 文件夹",
+      folderOpened: "已打开技能文件夹。",
+      folderFailed: "打开技能文件夹失败。",
+      openSource: "打开 {skill} 来源",
+      sourceOpened: "已在默认浏览器打开来源。",
+      sourceMissing: "没有记录网页来源。",
+      setSource: "设置来源",
+      noSource: "未记录来源",
+      officialSource: "官方来源",
+      customSource: "自定义来源",
+      sourceReadonly: "官方来源不能在这里修改。",
+      sourceSaved: "来源已保存。",
+      sourceCleared: "来源已清除。",
+      sourceInvalid: "请输入有效的 HTTP 或 HTTPS 地址。",
+      sourceDialogTitle: "设置来源",
+      sourceDialogNote: "为 {skill} 添加网页来源。",
+      sourceUrl: "来源 URL",
+      sourceHint: "只接受 HTTP 或 HTTPS 网页地址。",
+      clearSource: "清除来源",
+      saveSource: "保存来源",
       newLabel: "新建标签",
       refresh: "刷新",
       searchPlaceholder: "搜索名称或描述",
@@ -239,15 +373,47 @@
     }
   };
 
+  Object.assign(STRINGS.en, {
+    expandDescription: "Show more",
+    collapseDescription: "Show less",
+    addToProject: "Add to project",
+    alreadyInProject: "Already in project",
+    projectMembership: "Project membership",
+    projectMembershipHint: "This skill is assigned to these projects.",
+    projectSkillAdded: "{skill} was added to {project}.",
+    projectSkillRemoved: "{skill} was removed from {project}.",
+    projectRemoveHint: "Click again to remove",
+    removeFromProject: "Remove from {project}",
+    projectAddUnavailable: "Project writes are unavailable.",
+    projectReadOnlyAction: "Read-only project"
+  });
+
+  Object.assign(STRINGS.zh, {
+    expandDescription: "展开",
+    collapseDescription: "收起",
+    addToProject: "加入项目",
+    alreadyInProject: "已在项目中",
+    projectMembership: "归属项目",
+    projectMembershipHint: "此技能已加入以下项目。",
+    projectSkillAdded: "{skill} 已加入 {project}。",
+    projectSkillRemoved: "{skill} 已从 {project} 移除。",
+    projectRemoveHint: "再次点击移除",
+    removeFromProject: "从 {project} 移除",
+    projectAddUnavailable: "当前无法写入项目。",
+    projectReadOnlyAction: "只读项目"
+  });
+
   const state = {
     data: null,
-    filter: { kind: "all", labelId: null },
+    filter: { kind: "all", labelId: null, projectId: null },
     query: "",
     loading: true,
     fatal: "",
-    busySkill: "",
+    busySkills: new Set(),
+    busyProjectSkill: "",
     refreshing: false,
     rowErrors: new Map(),
+    agentIntents: new Map(),
     lang: "en",
     pageToken: "",
     session: "",
@@ -258,7 +424,11 @@
     labelId: "",
     labelSkill: "",
     returnToSkillLabels: false,
-    deleteLabelId: ""
+    deleteLabelId: "",
+    deleteProjectId: "",
+    confirmMode: "label",
+    sourceSkill: "",
+    expandedDescriptions: new Set()
   };
 
   const $ = (selector) => document.querySelector(selector);
@@ -308,6 +478,7 @@
 
   function renderStaticIcons() {
     setIcon($("#rail-mark"), "layers");
+    setIcon($("#new-project .icon-slot"), "plus");
     setIcon($("#new-label .icon-slot"), "plus");
     setIcon($("#refresh-rail .icon-slot"), "refresh");
     setIcon($("#refresh-top .icon-slot"), "refresh");
@@ -319,7 +490,10 @@
     document.title = t("railTitle");
     $("#app-title").textContent = t("railTitle");
     $("#app-subtitle").textContent = t("railSubtitle");
+    $("#projects-heading").textContent = t("projects");
     $("#labels-heading").textContent = t("labels");
+    $("#new-project").setAttribute("aria-label", t("addProject"));
+    $("#new-project").setAttribute("title", t("addProject"));
     $("#new-label").setAttribute("aria-label", t("newLabel"));
     $("#new-label").setAttribute("title", t("newLabel"));
     $("#refresh-rail-label").textContent = t("refresh");
@@ -331,6 +505,20 @@
     $("#confirm-cancel").textContent = t("cancel");
     $("#label-name-label").textContent = t("labelName");
     $("#label-name-hint").textContent = t("labelNameHint");
+    $("#project-dialog-title").textContent = t("projectAddTitle");
+    $("#project-dialog-note").textContent = t("projectAddNote");
+    $("#project-name-label").textContent = t("projectName");
+    $("#project-path-label").textContent = t("projectPathLabel");
+    $("#choose-project").textContent = t("chooseFolder");
+    $("#project-hint").textContent = t("projectHint");
+    $("#project-cancel").textContent = t("cancel");
+    $("#project-save").textContent = t("projectSave");
+    $("#source-dialog-title").textContent = t("sourceDialogTitle");
+    $("#source-url-label").textContent = t("sourceUrl");
+    $("#source-hint").textContent = t("sourceHint");
+    $("#source-clear").textContent = t("clearSource");
+    $("#source-save").textContent = t("saveSource");
+    $("#source-cancel").textContent = t("cancel");
     $("#create-label-from-sheet-label").textContent = t("createFromSheet");
     $("#skill-labels-save").textContent = t("saveLabels");
     $("#confirm-delete").textContent = t("delete");
@@ -401,6 +589,7 @@
     $("#view-nav").innerHTML = `
       <div class="nav-row"><div class="nav-button"><span class="skeleton-line short" style="width:100%"></span></div></div>
       <div class="nav-row"><div class="nav-button"><span class="skeleton-line short" style="width:78%"></span></div></div>`;
+    $("#project-nav").innerHTML = "";
     $("#label-nav").innerHTML = "";
     $("#rail-status").textContent = t("loading");
     $("#view-title").textContent = t("allSkillsTitle");
@@ -422,17 +611,30 @@
       </div>`;
   }
 
-  function navRow({ kind, label, iconName, count, labelId = "", actions = "" }) {
+  function navRow({
+    kind,
+    label,
+    iconName,
+    count,
+    labelId = "",
+    projectId = "",
+    badge = "",
+    actions = ""
+  }) {
     const active =
       state.filter.kind === kind &&
-      (kind !== "label" || state.filter.labelId === labelId);
+      (kind !== "label" || state.filter.labelId === labelId) &&
+      (kind !== "project" || state.filter.projectId === projectId);
     return `
       <div class="nav-row">
         <button class="nav-button" type="button" data-filter-kind="${escapeAttr(kind)}"${
           labelId ? ` data-filter-label="${escapeAttr(labelId)}"` : ""
+        }${
+          projectId ? ` data-filter-project="${escapeAttr(projectId)}"` : ""
         } aria-current="${active ? "true" : "false"}">
           ${icon(iconName)}
           <span class="nav-label">${escapeHtml(label)}</span>
+          ${badge ? `<span class="nav-badge">${escapeHtml(badge)}</span>` : ""}
           <span class="nav-count">${escapeHtml(String(count ?? ""))}</span>
         </button>
         ${actions}
@@ -447,7 +649,10 @@
     }
     const labels = data.labels || [];
     const canLabel = Boolean(data.capabilities?.canLabel);
+    const canManageProjects = Boolean(data.capabilities?.canManageProjects);
+    const projects = data.projects || [];
     $("#new-label").disabled = !canLabel || state.refreshing;
+    $("#new-project").disabled = !canManageProjects || state.refreshing;
     $("#view-nav").innerHTML = [
       navRow({
         kind: "all",
@@ -462,6 +667,30 @@
         count: data.summary?.untaggedCount ?? 0
       })
     ].join("");
+
+    $("#project-nav").innerHTML = projects.length
+      ? projects
+          .map((project) => {
+            const actions =
+              project.origin === "plugin" && canManageProjects
+                ? `<span class="nav-actions"><button class="icon-button" type="button" data-action="remove-project" data-project-id="${escapeAttr(
+                    project.id
+                  )}" aria-label="${escapeAttr(t("removeProject"))}" title="${escapeAttr(
+                    t("removeProject")
+                  )}">${icon("remove")}</button></span>`
+                : "";
+            return navRow({
+              kind: "project",
+              label: project.name,
+              iconName: "project",
+              count: project.skillCount ?? 0,
+              projectId: project.id,
+              badge: project.origin === "native" ? t("projectReadOnly") : "",
+              actions
+            });
+          })
+          .join("")
+      : `<div class="rail-status">${escapeHtml(t("noProjects"))}</div>`;
 
     $("#label-nav").innerHTML = labels.length
       ? labels
@@ -505,6 +734,12 @@
   }
 
   function currentViewTitle() {
+    if (state.filter.kind === "project") {
+      const project = state.data?.projects?.find(
+        (item) => item.id === state.filter.projectId
+      );
+      return project?.name || t("projectContext");
+    }
     if (state.filter.kind === "untagged") return t("untaggedTitle");
     if (state.filter.kind === "label") {
       const label = state.data?.labels?.find((item) => item.id === state.filter.labelId);
@@ -513,22 +748,35 @@
     return t("allSkillsTitle");
   }
 
+  function skillsInScope() {
+    if (!state.data) return [];
+    if (state.filter.kind !== "project") return state.data.skills;
+    const project = currentProject();
+    if (!project) return [];
+    return state.data.skills.filter((skill) => {
+      const agents = project.assignments?.[skill.name];
+      return Array.isArray(agents) && agents.length > 0;
+    });
+  }
+
   function filteredSkills() {
     if (!state.data) return [];
     const query = state.query.trim().toLocaleLowerCase();
-    return state.data.skills.filter((skill) => {
+    return skillsInScope().filter((skill) => {
       if (state.filter.kind === "untagged" && skill.labels.length) return false;
       if (state.filter.kind === "label" && !skill.labels.includes(state.filter.labelId)) {
         return false;
       }
       if (!query) return true;
-      return `${skill.name}\n${skill.description}`.toLocaleLowerCase().includes(query);
+      return `${skill.name}\n${skill.description}\n${skill.sourceLabel || ""}`
+        .toLocaleLowerCase()
+        .includes(query);
     });
   }
 
   function renderHeader() {
     if (!state.data) return;
-    const total = state.data.skills.length;
+    const total = skillsInScope().length;
     const shown = filteredSkills().length;
     $("#view-title").textContent = currentViewTitle();
     $("#view-count").textContent = countText(total, shown);
@@ -559,6 +807,26 @@
     }
     if (data.metadata.state === "error") {
       banners.push(banner("error", t("metadataError"), data.metadata.error || t("errorFallback")));
+    }
+    if (data.features?.state === "error") {
+      banners.push(
+        banner("error", t("projectWarnings"), data.features.error || t("errorFallback"))
+      );
+    }
+    const project = data.projects?.find(
+      (item) => item.id === state.filter.projectId
+    );
+    if (state.filter.kind === "project" && project) {
+      const kind = project.origin === "native" ? t("nativeProject") : t("pluginProject");
+      const detail = `${kind} · ${t("projectPath", { path: project.dir })}${
+        project.origin === "native" ? ` · ${t("projectReadOnlyHint")}` : ""
+      }`;
+      banners.push(banner("info", project.name, detail));
+      if (project.warnings?.length) {
+        banners.push(
+          banner("warn", t("projectWarnings"), project.warnings.slice(0, 4).join(" "))
+        );
+      }
     }
     if (data.metadata.orphanLinkCount > 0) {
       banners.push(
@@ -633,14 +901,112 @@
     return { label: t("unavailable"), hint: t("unavailableHint") };
   }
 
-  function renderAgentChips(skill, disabled) {
+  function agentIcon(agent) {
+    const generic = (hidden = false) =>
+      `<span class="agent-icon agent-icon-generic"${
+        hidden ? " hidden" : ""
+      } aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2.2 13.2 5.1v5.8L8 13.8 2.8 10.9V5.1Z"/><path d="M8 8v5.8M2.8 5.1 8 8l5.2-2.9"/></svg></span>`;
+    if (!agent.icon?.file) {
+      return generic();
+    }
+    if (agent.icon.mode === "mask") {
+      return `<span class="agent-icon agent-icon-mask" style="--agent-icon:url('icons/${escapeAttr(
+        agent.icon.file
+      )}')" aria-hidden="true"></span>`;
+    }
+    return `<img class="agent-icon" src="icons/${escapeAttr(
+      agent.icon.file
+    )}" alt="" data-image-fallback>${generic(
+      true
+    )}`;
+  }
+
+  function sourceAvatar(skill) {
+    if (skill.sourceOwner) {
+      return `<span class="source-avatar-wrap" aria-hidden="true"><img class="source-avatar" src="avatars/github/${escapeAttr(
+        skill.sourceOwner
+      )}.png" alt="" loading="lazy" data-image-fallback><span class="source-avatar source-avatar-fallback" hidden>${escapeHtml(
+        skill.sourceOwner.charAt(0).toUpperCase()
+      )}</span></span>`;
+    }
+    return `<span class="source-avatar-wrap source-avatar-neutral" aria-hidden="true">${icon(
+      skill.sourceURL ? "globe" : "folder"
+    )}</span>`;
+  }
+
+  function sourceLine(skill) {
+    if (skill.sourceURL) {
+      return `<button class="source-line" type="button" data-action="open-source" data-skill="${escapeAttr(
+        skill.name
+      )}" title="${escapeAttr(t("openSource", { skill: skill.name }))}">${icon(
+        skill.customSource ? "link" : "external"
+      )}<span>${escapeHtml(skill.sourceLabel || skill.sourceURL)}</span>${
+        skill.customSource
+          ? `<small>${escapeHtml(t("customSource"))}</small>`
+          : ""
+      }</button>`;
+    }
+    if (skill.canEditSource) {
+      return `<button class="source-line source-line-empty" type="button" data-action="set-source" data-skill="${escapeAttr(
+        skill.name
+      )}" title="${escapeAttr(t("setSource"))}">${icon(
+        "link"
+      )}<span>${escapeHtml(t("noSource"))}</span><small>${escapeHtml(
+        t("setSource")
+      )}</small></button>`;
+    }
+    return `<span class="source-line source-line-empty">${icon(
+      "folder"
+    )}<span>${escapeHtml(t("noSource"))}</span></span>`;
+  }
+
+  function agentIntentKey(skillName, agentId) {
+    return `${skillName}\n${agentId}`;
+  }
+
+  function pendingAgentIds(skillName) {
+    const ids = new Set();
+    for (const key of state.agentIntents.keys()) {
+      const [name, agentId] = key.split("\n");
+      if (name === skillName) ids.add(agentId);
+    }
+    return ids;
+  }
+
+  function setSkillAgentState(skillName, agentId, enabled) {
+    const skill = state.data?.skills?.find((item) => item.name === skillName);
+    if (!skill) return;
+    const agents = new Set(skill.assignedAgents || []);
+    if (enabled) agents.add(agentId);
+    else agents.delete(agentId);
+    skill.assignedAgents = [...agents].sort();
+  }
+
+  function setSkillAllAgentsState(skillName, enabled) {
+    const skill = state.data?.skills?.find((item) => item.name === skillName);
+    if (!skill) return;
+    const agents = new Set(skill.assignedAgents || []);
+    for (const agent of state.data.agents || []) {
+      if (enabled) agents.add(agent.id);
+      else agents.delete(agent.id);
+    }
+    skill.assignedAgents = [...agents].sort();
+  }
+
+  function applyPendingAgentIntents() {
+    for (const [key, intent] of state.agentIntents) {
+      const [skillName, agentId] = key.split("\n");
+      setSkillAgentState(skillName, agentId, intent.enabled);
+    }
+  }
+
+  function renderAgentChips(skill, disabled, pendingIds) {
     const assigned = new Set(skill.assignedAgents || []);
     if (!state.data.agents.length) {
       return `<div class="no-agents">${icon("warning")}<span>${escapeHtml(
         t("noAgentsBody")
       )}</span></div>`;
     }
-    const showNames = state.data.agents.length <= 6;
     const groupLabel = t(
       state.data.agents.length === 1 ? "eligibleAgentsOne" : "eligibleAgents",
       { count: state.data.agents.length }
@@ -652,23 +1018,207 @@
           agent: agent.name,
           skill: skill.name
         });
-        return `<button class="agent-chip${showNames ? "" : " icon-only"}" type="button" data-action="toggle-agent" data-skill="${escapeAttr(
+        const pending = pendingIds.has(agent.id);
+        return `<button class="agent-chip${pending ? " is-applying" : ""}" type="button" data-action="toggle-agent" data-skill="${escapeAttr(
           skill.name
         )}" data-agent-id="${escapeAttr(agent.id)}" data-enabled="${on ? "false" : "true"}" aria-pressed="${
           on ? "true" : "false"
-        }" aria-label="${escapeAttr(label)}" title="${escapeAttr(label)}"${
+        }" aria-busy="${pending ? "true" : "false"}" aria-label="${escapeAttr(label)}" title="${escapeAttr(label)}"${
           disabled ? " disabled" : ""
-        }><span class="monogram">${escapeHtml(agent.initials || "?")}</span>${
-          showNames ? `<span class="agent-name">${escapeHtml(agent.name)}</span>` : ""
-        }</button>`;
+        }>${agentIcon(agent)}</button>`;
       })
       .join("")}</div>`;
   }
 
+  function currentProject() {
+    if (state.filter.kind !== "project") return null;
+    return (
+      state.data?.projects?.find((item) => item.id === state.filter.projectId) ||
+      null
+    );
+  }
+
+  function projectMemberships(skill) {
+    return (state.data?.projects || []).filter((project) => {
+      const agents = project.assignments?.[skill.name];
+      return Array.isArray(agents) && agents.length > 0;
+    });
+  }
+
+  function hasActiveProjectAssignment(project, skill) {
+    const agents = project.assignments?.[skill.name];
+    if (!Array.isArray(agents) || !agents.length) return false;
+    if (project.origin !== "native") return true;
+    const eligible = new Set((state.data?.projectAgents || []).map((agent) => agent.id));
+    return agents.some((agentId) => eligible.has(agentId));
+  }
+
+  function projectAddMenu(skill) {
+    const projects = state.data?.projects || [];
+    const memberships = new Set(
+      projects
+        .filter((project) => hasActiveProjectAssignment(project, skill))
+        .map((project) => project.id)
+    );
+    const canAddProject = Boolean(state.data?.capabilities?.canAssignProject);
+    const options = projects.length
+      ? projects
+          .map((project) => {
+            const joined = memberships.has(project.id);
+            const unavailable =
+              !canAddProject ||
+              (project.origin !== "native" && project.readOnly);
+            const detail = joined
+              ? t("projectRemoveHint")
+              : !canAddProject
+                ? t("projectAddUnavailable")
+                : project.origin === "native"
+                  ? t("nativeProject")
+                  : project.readOnly
+                    ? t("projectReadOnlyAction")
+                    : t("pluginProject");
+            return `<button class="project-add-option${
+              joined ? " is-joined" : ""
+            }" type="button" data-action="add-to-project" data-project-id="${escapeAttr(
+              project.id
+            )}" data-skill="${escapeAttr(skill.name)}" data-joined="${
+              joined ? "true" : "false"
+            }"${unavailable ? " disabled" : ""} title="${escapeAttr(
+              joined
+                ? t("removeFromProject", { project: project.name })
+                : project.name
+            )}" aria-pressed="${joined ? "true" : "false"}"><span class="project-add-name">${
+              joined
+                ? `<span class="project-add-check">${icon("check")}</span>`
+                : ""
+            }<span>${escapeHtml(project.name)}</span></span><small>${escapeHtml(
+              detail
+            )}</small></button>`;
+          })
+          .join("")
+      : `<div class="project-add-empty">${escapeHtml(t("noProjects"))}</div>`;
+    return `<details class="project-add">
+      <summary class="icon-button skill-action project-add-trigger" aria-label="${escapeAttr(
+        t("addToProject")
+      )}" title="${escapeAttr(t("addToProject"))}">${icon("project")}</summary>
+      <div class="project-add-menu">
+        <div class="project-add-title">${escapeHtml(t("addToProject"))}</div>
+        ${options}
+      </div>
+    </details>`;
+  }
+
+  function projectMembershipBlock(skill) {
+    const projects = projectMemberships(skill);
+    if (!projects.length) return "";
+    return `<div class="project-membership">
+      <div class="project-membership-title">${escapeHtml(t("projectMembership"))}</div>
+      <div class="project-membership-list">${projects
+        .map(
+          (project) =>
+            `<button class="project-membership-chip" type="button" data-action="filter-project" data-project-id="${escapeAttr(
+              project.id
+            )}" title="${escapeAttr(t("projectMembershipHint"))}">${escapeHtml(
+              project.name
+            )}</button>`
+        )
+        .join("")}</div>
+    </div>`;
+  }
+
+  function projectAgentChips(project, skill, disabled) {
+    const agents = state.data.projectAgents || [];
+    if (!agents.length) {
+      return `<div class="no-agents">${icon("warning")}<span>${escapeHtml(
+        t("projectNoAgents")
+      )}</span></div>`;
+    }
+    const assigned = new Set(project.assignments?.[skill.name] || []);
+    return `<div class="agent-list" role="group" aria-label="${escapeAttr(
+      t("projectContext")
+    )}">${agents
+      .map((agent) => {
+        const on = assigned.has(agent.id);
+        const label = t(on ? "projectAgentDisable" : "projectAgentEnable", {
+          agent: agent.name,
+          skill: skill.name,
+          project: project.name
+        });
+        return `<button class="agent-chip" type="button" data-action="project-agent" data-project-id="${escapeAttr(
+          project.id
+        )}" data-skill="${escapeAttr(skill.name)}" data-agent-id="${escapeAttr(
+          agent.id
+        )}" data-enabled="${on ? "false" : "true"}" aria-pressed="${
+          on ? "true" : "false"
+        }" aria-label="${escapeAttr(label)}" title="${escapeAttr(label)}"${
+          disabled ? " disabled" : ""
+        }>${agentIcon(agent)}</button>`;
+      })
+      .join("")}</div>`;
+  }
+
+  function projectControls(project, skill) {
+    const agents = state.data.projectAgents || [];
+    const assigned = new Set(project.assignments?.[skill.name] || []);
+    const selected = agents.filter((agent) => assigned.has(agent.id));
+    const value =
+      !agents.length
+        ? { key: "unavailable", selected: 0, total: 0 }
+        : selected.length === agents.length
+          ? { key: "on", selected: selected.length, total: agents.length }
+          : selected.length
+            ? { key: "mixed", selected: selected.length, total: agents.length }
+            : { key: "off", selected: 0, total: agents.length };
+    const copy = aggregateCopy(value);
+    const busy = state.busyProjectSkill === `${project.id}:${skill.name}`;
+    const disabled =
+      busy || project.readOnly || !state.data.capabilities?.canAssignProject;
+    return `
+      <div class="project-controls">
+        <div class="aggregate">
+          <div class="aggregate-copy">
+            <span class="aggregate-state">${escapeHtml(t("projectContext"))} · ${escapeHtml(
+              copy.label
+            )}</span>
+            <span class="aggregate-note">${escapeHtml(
+              value.total ? t("selectedAgents", value) : copy.hint
+            )}</span>
+          </div>
+          ${
+            project.readOnly
+              ? `<span class="readonly-badge">${escapeHtml(t("projectReadOnly"))}</span>`
+              : `<div class="segmented" role="group" aria-label="${escapeAttr(
+                  t("projectAllOn", { skill: skill.name, project: project.name })
+                )}">
+                  <button type="button" data-action="project-global" data-project-id="${escapeAttr(
+                    project.id
+                  )}" data-skill="${escapeAttr(skill.name)}" data-enabled="true" aria-pressed="${
+                    value.key === "on" ? "true" : "false"
+                  }"${disabled ? " disabled" : ""}>${escapeHtml(t("allOn"))}</button>
+                  <button type="button" data-action="project-global" data-project-id="${escapeAttr(
+                    project.id
+                  )}" data-skill="${escapeAttr(skill.name)}" data-enabled="false" aria-pressed="${
+                    value.key === "off" ? "true" : "false"
+                  }"${disabled ? " disabled" : ""}>${escapeHtml(t("allOff"))}</button>
+                </div>`
+          }
+        </div>
+        ${projectAgentChips(project, skill, project.readOnly || disabled)}
+        <p class="project-note">${escapeHtml(t("projectSharedHint"))}</p>
+      </div>`;
+  }
+
   function renderSkillRow(skill) {
     const data = state.data;
-    const busy = state.busySkill === skill.name;
-    const disabled = busy || !data.capabilities.canAssign;
+    const project = currentProject();
+    const projectBusy = project
+      ? state.busyProjectSkill === `${project.id}:${skill.name}`
+      : false;
+    const pendingIds = pendingAgentIds(skill.name);
+    const globalBusy = state.busySkills.has(skill.name);
+    const busy = globalBusy || pendingIds.size > 0 || projectBusy;
+    const disabled = globalBusy || projectBusy || !data.capabilities.canAssign;
+    const globalDisabled = disabled || pendingIds.size > 0;
     const value = aggregate(skill);
     const copy = aggregateCopy(value);
     const chips = skill.labels
@@ -680,20 +1230,17 @@
       )
       .join("");
     const description = skill.description || t("noDescription");
-    const source = skill.sourceLabel
-      ? `<span class="source-pill" title="${escapeAttr(skill.sourceLabel)}">${escapeHtml(
-          skill.sourceLabel
-        )}</span>`
-      : "";
     const warning = skill.offHere
       ? `<div class="inline-warning">${icon("warning")}<span>${escapeHtml(
           t("offHere")
         )}</span></div>`
       : "";
-    const rowError = state.rowErrors.get(skill.name);
+    const errorKey = project ? `${project.id}:${skill.name}` : skill.name;
+    const rowError = state.rowErrors.get(errorKey);
     const error = rowError
       ? `<div class="row-error">${icon("warning")}<span>${escapeHtml(rowError)}</span></div>`
       : "";
+    const descriptionExpanded = state.expandedDescriptions.has(skill.name);
     const busyMark = busy
       ? `<span class="spinner" aria-label="${escapeAttr(t("busy"))}"></span>`
       : "";
@@ -706,11 +1253,38 @@
       <article class="skill-row${busy ? " is-busy" : ""}" data-skill-row="${escapeAttr(skill.name)}">
         <div class="skill-main">
           <div class="skill-title-line">
+            ${sourceAvatar(skill)}
             <h3>${escapeHtml(skill.name)}</h3>
-            ${source}
+            <div class="skill-actions">
+              <button class="icon-button skill-action" type="button" data-action="copy-skill" data-skill="${escapeAttr(
+                skill.name
+              )}" aria-label="${escapeAttr(
+                t("copySkill", { skill: skill.name })
+              )}" title="${escapeAttr(
+                t("copySkill", { skill: skill.name })
+              )}">${icon("copy")}</button>
+              <button class="icon-button skill-action" type="button" data-action="open-folder" data-skill="${escapeAttr(
+                skill.name
+              )}" aria-label="${escapeAttr(
+                t("openFolder", { skill: skill.name })
+              )}" title="${escapeAttr(
+                t("openFolder", { skill: skill.name })
+              )}">${icon("folder-open")}</button>
+              ${projectAddMenu(skill)}
+            </div>
             ${busyMark}
           </div>
-          <p class="skill-description">${escapeHtml(description)}</p>
+          ${sourceLine(skill)}
+          <p class="skill-description${descriptionExpanded ? " is-expanded" : ""}">${escapeHtml(
+            description
+          )}</p>
+          <button class="description-toggle" type="button" data-action="toggle-description" data-skill="${escapeAttr(
+            skill.name
+          )}" aria-expanded="${descriptionExpanded ? "true" : "false"}"${
+            descriptionExpanded ? "" : " hidden"
+          }>${escapeHtml(
+            t(descriptionExpanded ? "collapseDescription" : "expandDescription")
+          )}</button>
           <div class="skill-labels">
             ${chips}
             <button class="edit-labels-button" type="button" data-action="edit-labels" data-skill="${escapeAttr(
@@ -723,31 +1297,38 @@
           ${error}
         </div>
         <div class="skill-controls">
-          <div class="aggregate">
-            <div class="aggregate-copy">
-              <span class="aggregate-state">${escapeHtml(copy.label)}</span>
-              <span class="aggregate-note">${escapeHtml(
-                value.total ? selectedText : copy.hint
-              )}</span>
-            </div>
-            <div class="segmented" role="group" aria-label="${escapeAttr(
-              t("globalOn", { skill: skill.name })
-            )}">
-              <button type="button" data-action="global" data-skill="${escapeAttr(
-                skill.name
-              )}" data-enabled="true" aria-pressed="${value.key === "on" ? "true" : "false"}" aria-label="${escapeAttr(
-                t("globalOn", { skill: skill.name })
-              )}"${disabled ? " disabled" : ""}>${escapeHtml(t("allOn"))}</button>
-              <button type="button" data-action="global" data-skill="${escapeAttr(
-                skill.name
-              )}" data-enabled="false" aria-pressed="${
-                value.key === "off" ? "true" : "false"
-              }" aria-label="${escapeAttr(
-                t("globalOff", { skill: skill.name })
-              )}"${disabled ? " disabled" : ""}>${escapeHtml(t("allOff"))}</button>
-            </div>
-          </div>
-          ${renderAgentChips(skill, disabled)}
+          ${
+            project
+              ? projectControls(project, skill)
+              : `<div class="aggregate">
+                  <div class="aggregate-copy">
+                    <span class="aggregate-state">${escapeHtml(copy.label)}</span>
+                    <span class="aggregate-note">${escapeHtml(
+                      value.total ? selectedText : copy.hint
+                    )}</span>
+                  </div>
+                  <div class="segmented" role="group" aria-label="${escapeAttr(
+                    t("globalOn", { skill: skill.name })
+                  )}">
+                    <button type="button" data-action="global" data-skill="${escapeAttr(
+                      skill.name
+                    )}" data-enabled="true" aria-pressed="${
+                      value.key === "on" ? "true" : "false"
+                    }" aria-label="${escapeAttr(
+                      t("globalOn", { skill: skill.name })
+                    )}"${globalDisabled ? " disabled" : ""}>${escapeHtml(t("allOn"))}</button>
+                    <button type="button" data-action="global" data-skill="${escapeAttr(
+                      skill.name
+                    )}" data-enabled="false" aria-pressed="${
+                      value.key === "off" ? "true" : "false"
+                    }" aria-label="${escapeAttr(
+                      t("globalOff", { skill: skill.name })
+                    )}"${globalDisabled ? " disabled" : ""}>${escapeHtml(t("allOff"))}</button>
+                  </div>
+                </div>
+                ${renderAgentChips(skill, disabled, pendingIds)}`
+          }
+          ${projectMembershipBlock(skill)}
         </div>
       </article>`;
   }
@@ -803,6 +1384,27 @@
       return;
     }
     list.innerHTML = skills.map(renderSkillRow).join("");
+    syncDescriptionToggles();
+  }
+
+  function syncDescriptionToggles() {
+    for (const row of $$("[data-skill-row]")) {
+      const skillName = row.dataset.skillRow;
+      const description = row.querySelector(".skill-description");
+      const toggle = row.querySelector(".description-toggle");
+      if (!description || !toggle) continue;
+
+      if (state.expandedDescriptions.has(skillName)) {
+        toggle.hidden = false;
+        continue;
+      }
+
+      // Measure the rendered text instead of relying on a character count:
+      // narrow layouts can exceed three lines with a fairly short sentence.
+      toggle.hidden =
+        description.scrollHeight <= description.clientHeight + 1 &&
+        description.textContent.trim().length <= 120;
+    }
   }
 
   function formatChecked(epoch) {
@@ -840,20 +1442,27 @@
 
   function setData(data) {
     state.data = data;
+    applyPendingAgentIntents();
     state.loading = false;
     state.rowErrors.clear();
     if (
       state.filter.kind === "label" &&
       !data.labels.some((label) => label.id === state.filter.labelId)
     ) {
-      state.filter = { kind: "all", labelId: null };
+      state.filter = { kind: "all", labelId: null, projectId: null };
+    }
+    if (
+      state.filter.kind === "project" &&
+      !data.projects?.some((project) => project.id === state.filter.projectId)
+    ) {
+      state.filter = { kind: "all", labelId: null, projectId: null };
     }
     renderAll();
     schedulePoll();
   }
 
-  function setFilter(kind, labelId = null) {
-    state.filter = { kind, labelId };
+  function setFilter(kind, labelId = null, projectId = null) {
+    state.filter = { kind, labelId, projectId };
     renderAll();
   }
 
@@ -1032,9 +1641,12 @@
   }
 
   async function mutateGlobal(skillName, enabled) {
-    if (state.busySkill) return;
-    state.busySkill = skillName;
+    if (state.busySkills.has(skillName) || pendingAgentIds(skillName).size > 0) return;
+    state.busySkills.add(skillName);
     state.rowErrors.delete(skillName);
+    const skillBefore = state.data?.skills?.find((item) => item.name === skillName);
+    const agentsBefore = [...(skillBefore?.assignedAgents || [])];
+    setSkillAllAgentsState(skillName, enabled);
     renderAll();
     try {
       const data = await api(
@@ -1045,25 +1657,54 @@
       showToast(t(enabled ? "appliedOn" : "appliedOff", { skill: skillName }));
     } catch (error) {
       if (error.state) setData(error.state);
+      else if (skillBefore) skillBefore.assignedAgents = agentsBefore;
       state.rowErrors.set(skillName, error.message || t("errorFallback"));
       showToast(error.message || t("errorFallback"), "error");
     } finally {
-      state.busySkill = "";
+      state.busySkills.delete(skillName);
       renderAll();
     }
   }
 
   async function mutateAgent(skillName, agentId, enabled) {
-    if (state.busySkill) return;
-    state.busySkill = skillName;
+    if (state.busySkills.has(skillName)) return;
+    const key = agentIntentKey(skillName, agentId);
+    const existing = state.agentIntents.get(key);
+    if (existing) {
+      existing.enabled = enabled;
+      setSkillAgentState(skillName, agentId, enabled);
+      renderAll();
+      return;
+    }
+    const skill = state.data?.skills?.find((item) => item.name === skillName);
+    const intent = {
+      enabled,
+      initial: Boolean(skill?.assignedAgents?.includes(agentId))
+    };
+    state.agentIntents.set(key, intent);
     state.rowErrors.delete(skillName);
+    setSkillAgentState(skillName, agentId, enabled);
     renderAll();
     try {
-      const data = await api(
-        `api/skills/${encodeURIComponent(skillName)}/agents`,
-        { method: "POST", body: { agentId, enabled } }
-      );
-      setData(data);
+      await new Promise((resolve) => setTimeout(resolve, 120));
+      let sent = null;
+      let wrote = false;
+      while (sent !== intent.enabled) {
+        sent = intent.enabled;
+        // Returning to the initial state is a no-op only before any write.
+        if (!wrote && sent === intent.initial) break;
+        wrote = true;
+        const data = await api(
+          `api/skills/${encodeURIComponent(skillName)}/agents`,
+          { method: "POST", body: { agentId, enabled: sent } }
+        );
+        setData(data);
+        if (intent.enabled !== sent) {
+          setSkillAgentState(skillName, agentId, intent.enabled);
+          renderAll();
+        }
+      }
+      if (!wrote) return;
       const agent = state.data.agents.find((item) => item.id === agentId);
       showToast(
         t("agentApplied", {
@@ -1073,10 +1714,11 @@
       );
     } catch (error) {
       if (error.state) setData(error.state);
+      else setSkillAgentState(skillName, agentId, intent.initial);
       state.rowErrors.set(skillName, error.message || t("errorFallback"));
       showToast(error.message || t("errorFallback"), "error");
     } finally {
-      state.busySkill = "";
+      state.agentIntents.delete(key);
       renderAll();
     }
   }
@@ -1183,15 +1825,38 @@
     if (!state.data?.capabilities?.canLabel) return;
     const label = state.data?.labels?.find((item) => item.id === labelId);
     if (!label) return;
+    state.confirmMode = "label";
     state.deleteLabelId = labelId;
+    state.deleteProjectId = "";
     $("#confirm-title").textContent = t("deleteLabelTitle");
     $("#confirm-note").textContent = "";
     $("#confirm-copy").textContent = t("deleteLabelBody", { label: label.name });
+    $("#confirm-delete").textContent = t("delete");
     openDialog("confirm-dialog");
   }
 
   async function submitConfirm(event) {
     event?.preventDefault?.();
+    if (state.confirmMode === "project") {
+      if (!state.deleteProjectId) return;
+      const button = $("#confirm-delete");
+      button.disabled = true;
+      try {
+        const data = await api(`api/projects/${encodeURIComponent(state.deleteProjectId)}/remove`, {
+          method: "POST",
+          body: {}
+        });
+        setData(data);
+        closeDialog("confirm-dialog");
+        state.deleteProjectId = "";
+        showToast(t("projectRemoved"));
+      } catch (error) {
+        showToast(error.message || t("errorFallback"), "error");
+      } finally {
+        button.disabled = false;
+      }
+      return;
+    }
     if (!state.deleteLabelId) return;
     const button = $("#confirm-delete");
     button.disabled = true;
@@ -1203,11 +1868,211 @@
       setData(data);
       closeDialog("confirm-dialog");
       state.deleteLabelId = "";
+      state.confirmMode = "label";
       showToast(t("labelDeleted"));
     } catch (error) {
       showToast(error.message || t("errorFallback"), "error");
     } finally {
       button.disabled = false;
+    }
+  }
+
+  async function runSkillAction(action, skillName) {
+    try {
+      await api(`api/skills/${encodeURIComponent(skillName)}/${action}`, {
+        method: "POST",
+        body: {}
+      });
+      if (action === "copy") showToast(t("copied", { skill: skillName }));
+      else if (action === "folder") showToast(t("folderOpened"));
+      else showToast(t("sourceOpened"));
+    } catch (error) {
+      const fallback =
+        action === "copy"
+          ? t("copyFailed")
+          : action === "folder"
+            ? t("folderFailed")
+            : t("sourceMissing");
+      showToast(error.message || fallback, "error");
+    }
+  }
+
+  function openSourceDialog(skillName) {
+    const skill = state.data?.skills?.find((item) => item.name === skillName);
+    if (!skill || !state.data?.capabilities?.canSetSource || !skill.canEditSource) return;
+    state.sourceSkill = skillName;
+    $("#source-dialog-note").textContent = t("sourceDialogNote", { skill: skillName });
+    $("#source-url-input").value = skill.customSource ? skill.sourceURL : "";
+    $("#source-form-error").textContent = "";
+    $("#source-clear").disabled = !skill.customSource;
+    openDialog("source-dialog");
+    requestAnimationFrame(() => $("#source-url-input").focus());
+  }
+
+  async function submitSource(clear = false) {
+    if (!state.sourceSkill) return;
+    const button = $("#source-save");
+    button.disabled = true;
+    $("#source-form-error").textContent = "";
+    try {
+      const data = await api(
+        `api/skills/${encodeURIComponent(state.sourceSkill)}/source`,
+        {
+          method: "POST",
+          body: { url: clear ? "" : $("#source-url-input").value.trim() }
+        }
+      );
+      setData(data);
+      closeDialog("source-dialog");
+      showToast(t(clear ? "sourceCleared" : "sourceSaved"));
+      state.sourceSkill = "";
+    } catch (error) {
+      $("#source-form-error").textContent = error.message || t("sourceInvalid");
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  function openProjectDialog() {
+    if (!state.data?.capabilities?.canManageProjects) return;
+    $("#project-name-input").value = "";
+    $("#project-path-input").value = "";
+    $("#project-form-error").textContent = "";
+    openDialog("project-dialog");
+    requestAnimationFrame(() => $("#project-name-input").focus());
+  }
+
+  async function chooseProjectFolder() {
+    const button = $("#choose-project");
+    button.disabled = true;
+    try {
+      const result = await api("api/projects/choose", { method: "POST", body: {} });
+      if (result.path) {
+        $("#project-path-input").value = result.path;
+        if (!$("#project-name-input").value.trim()) {
+          const parts = result.path.split(/[\\/]/).filter(Boolean);
+          $("#project-name-input").value = parts.at(-1) || "";
+        }
+      }
+    } catch (error) {
+      $("#project-form-error").textContent = error.message || t("errorFallback");
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  async function submitProject(event) {
+    event?.preventDefault?.();
+    const dir = $("#project-path-input").value.trim();
+    if (!dir) {
+      $("#project-form-error").textContent = t("projectNameRequired");
+      return;
+    }
+    const button = $("#project-save");
+    button.disabled = true;
+    $("#project-form-error").textContent = "";
+    try {
+      const data = await api("api/projects", {
+        method: "POST",
+        body: { dir, name: $("#project-name-input").value.trim() }
+      });
+      const projectId = data.createdProjectId;
+      setData(data);
+      closeDialog("project-dialog");
+      showToast(t("projectAdded"));
+      if (projectId) setFilter("project", null, projectId);
+    } catch (error) {
+      $("#project-form-error").textContent = error.message || t("errorFallback");
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  function openProjectConfirm(projectId) {
+    const project = state.data?.projects?.find((item) => item.id === projectId);
+    if (!project || project.origin !== "plugin") return;
+    state.confirmMode = "project";
+    state.deleteProjectId = projectId;
+    $("#confirm-title").textContent = t("projectRemoveTitle");
+    $("#confirm-note").textContent = "";
+    $("#confirm-copy").textContent = t("projectRemoveBody", { name: project.name });
+    $("#confirm-delete").textContent = t("removeProject");
+    openDialog("confirm-dialog");
+  }
+
+  async function mutateProjectGlobal(
+    projectId,
+    skillName,
+    enabled,
+    added = null,
+    removeAll = false
+  ) {
+    const key = `${projectId}:${skillName}`;
+    if (state.busyProjectSkill) return;
+    state.busyProjectSkill = key;
+    state.rowErrors.delete(key);
+    renderAll();
+    try {
+      const data = await api(
+        `api/projects/${encodeURIComponent(projectId)}/skills/${encodeURIComponent(
+          skillName
+        )}/all`,
+        { method: "POST", body: removeAll ? { enabled, removeAll: true } : { enabled } }
+      );
+      setData(data);
+      const projectName =
+        state.data.projects.find((item) => item.id === projectId)?.name || projectId;
+      if (added === true) {
+        showToast(t("projectSkillAdded", { skill: skillName, project: projectName }));
+      } else if (added === false) {
+        showToast(
+          t("projectSkillRemoved", { skill: skillName, project: projectName })
+        );
+      } else {
+        showToast(
+          t(enabled ? "projectAppliedOn" : "projectAppliedOff", { skill: skillName })
+        );
+      }
+    } catch (error) {
+      if (error.state) setData(error.state);
+      state.rowErrors.set(key, error.message || t("errorFallback"));
+      showToast(error.message || t("errorFallback"), "error");
+    } finally {
+      state.busyProjectSkill = "";
+      renderAll();
+    }
+  }
+
+  async function mutateProjectAgent(projectId, skillName, agentId, enabled) {
+    const key = `${projectId}:${skillName}`;
+    if (state.busyProjectSkill) return;
+    state.busyProjectSkill = key;
+    state.rowErrors.delete(key);
+    renderAll();
+    try {
+      const data = await api(
+        `api/projects/${encodeURIComponent(projectId)}/skills/${encodeURIComponent(
+          skillName
+        )}/agents`,
+        { method: "POST", body: { agentId, enabled } }
+      );
+      setData(data);
+      const agent = state.data.projectAgents.find((item) => item.id === agentId);
+      const project = state.data.projects.find((item) => item.id === projectId);
+      showToast(
+        t("projectAgentApplied", {
+          agent: agent?.name || agentId,
+          skill: skillName,
+          project: project?.name || projectId
+        })
+      );
+    } catch (error) {
+      if (error.state) setData(error.state);
+      state.rowErrors.set(key, error.message || t("errorFallback"));
+      showToast(error.message || t("errorFallback"), "error");
+    } finally {
+      state.busyProjectSkill = "";
+      renderAll();
     }
   }
 
@@ -1242,6 +2107,70 @@
       setFilter("label", element.dataset.labelId);
       return;
     }
+    if (action === "copy-skill") {
+      runSkillAction("copy", element.dataset.skill);
+      return;
+    }
+    if (action === "open-folder") {
+      runSkillAction("folder", element.dataset.skill);
+      return;
+    }
+    if (action === "toggle-description") {
+      const skillName = element.dataset.skill;
+      if (state.expandedDescriptions.has(skillName)) {
+        state.expandedDescriptions.delete(skillName);
+      } else {
+        state.expandedDescriptions.add(skillName);
+      }
+      renderList();
+      return;
+    }
+    if (action === "add-to-project") {
+      const details = element.closest("details");
+      if (details) details.removeAttribute("open");
+      const joined = element.dataset.joined === "true";
+      mutateProjectGlobal(
+        element.dataset.projectId,
+        element.dataset.skill,
+        !joined,
+        !joined,
+        joined
+      );
+      return;
+    }
+    if (action === "filter-project") {
+      setFilter("project", null, element.dataset.projectId);
+      return;
+    }
+    if (action === "open-source") {
+      runSkillAction("browse", element.dataset.skill);
+      return;
+    }
+    if (action === "set-source") {
+      openSourceDialog(element.dataset.skill);
+      return;
+    }
+    if (action === "remove-project") {
+      openProjectConfirm(element.dataset.projectId);
+      return;
+    }
+    if (action === "project-global") {
+      mutateProjectGlobal(
+        element.dataset.projectId,
+        element.dataset.skill,
+        element.dataset.enabled === "true"
+      );
+      return;
+    }
+    if (action === "project-agent") {
+      mutateProjectAgent(
+        element.dataset.projectId,
+        element.dataset.skill,
+        element.dataset.agentId,
+        element.dataset.enabled === "true"
+      );
+      return;
+    }
     if (action === "global") {
       mutateGlobal(element.dataset.skill, element.dataset.enabled === "true");
       return;
@@ -1262,6 +2191,22 @@
   }
 
   function wireEvents() {
+    document.addEventListener(
+      "error",
+      (event) => {
+        const image = event.target;
+        if (
+          !(image instanceof HTMLImageElement) ||
+          !image.hasAttribute("data-image-fallback")
+        ) {
+          return;
+        }
+        image.hidden = true;
+        if (image.nextElementSibling) image.nextElementSibling.hidden = false;
+      },
+      true
+    );
+
     document.addEventListener("click", (event) => {
       const close = event.target.closest("[data-close]");
       if (close) {
@@ -1276,11 +2221,20 @@
       }
       const filter = event.target.closest("[data-filter-kind]");
       if (filter) {
-        setFilter(filter.dataset.filterKind, filter.dataset.filterLabel || null);
+        setFilter(
+          filter.dataset.filterKind,
+          filter.dataset.filterLabel || null,
+          filter.dataset.filterProject || null
+        );
       }
     });
 
     $("#new-label").addEventListener("click", () => openLabelDialog("create"));
+    $("#new-project").addEventListener("click", openProjectDialog);
+    $("#choose-project").addEventListener("click", chooseProjectFolder);
+    $("#project-save").addEventListener("click", submitProject);
+    $("#source-save").addEventListener("click", () => submitSource(false));
+    $("#source-clear").addEventListener("click", () => submitSource(true));
     $("#search").addEventListener("input", (event) => {
       state.query = event.target.value;
       renderHeader();

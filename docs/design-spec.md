@@ -1,7 +1,9 @@
 # Personal Magpie Skills Manager: Detailed Design
 
 Date: 2026-10-29 (Asia/Shanghai)
-Stage: DESIGN ONLY
+Stage: baseline design; the experience upgrade is implemented in the
+workspace and verified in isolation, while live reload/deployment remains
+separate.
 Status: confirmed product boundaries; proposed implementation details.
 
 > Implementation status (2026-10-30): the design has been executed in the
@@ -10,9 +12,16 @@ Status: confirmed product boundaries; proposed implementation details.
 > [implementation.md](implementation.md) for the implementation and live
 > installation record.
 
+> Current document map: product scope is in
+> [01-项目定位与范围.md](01-项目定位与范围.md), runtime architecture is in
+> [02-架构与执行说明.md](02-架构与执行说明.md), and current status is in
+> [03-状态与迭代计划.md](03-状态与迭代计划.md). This file remains the
+> detailed design history rather than the first entry point.
+
 This document is a design, not an implementation or execution authorization.
-Do not write plugin code, run tests, start services, modify live assignments,
-install dependencies or register the production plugin at this stage.
+The following design-only wording describes the original stage. The baseline
+implementation and isolated upgrade now exist; live reload and deployment
+still require explicit confirmation.
 
 ## 1. Product goal
 

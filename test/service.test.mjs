@@ -102,6 +102,7 @@ describe("skills manager service", () => {
     const context = setup();
     try {
       const session = await sessionFor(context.service);
+      const refreshCount = context.discovery.refreshCalls.length;
       const off = await makeRequest(context.service, {
         path: "/api/skills/alpha/agents/all",
         method: "POST",
@@ -116,6 +117,8 @@ describe("skills manager service", () => {
       expect(
         off.data.skills.find((skill) => skill.name === "alpha").assignedAgents
       ).toEqual(["hidden"]);
+      expect(context.discovery.refreshCalls.length).toBe(refreshCount + 1);
+      expect(context.discovery.refreshCalls.at(-1)).toEqual({});
 
       const on = await makeRequest(context.service, {
         path: "/api/skills/alpha/agents/all",
@@ -202,6 +205,29 @@ describe("skills manager service", () => {
       });
       expect(result.response.status).toBe(409);
       expect(result.data.error.code).toBe("no_eligible_agents");
+      expect(context.calls.length).toBe(0);
+    } finally {
+      context.cleanup();
+    }
+  });
+
+  test("does not write when cached discovery is in an error state", async () => {
+    const context = setup();
+    try {
+      context.discovery.set({
+        state: "error",
+        agents: [],
+        error: "fixture discovery failed"
+      });
+      const session = await sessionFor(context.service);
+      const result = await makeRequest(context.service, {
+        path: "/api/skills/alpha/agents",
+        method: "POST",
+        session,
+        body: { agentId: "codex", enabled: true }
+      });
+      expect(result.response.status).toBe(503);
+      expect(result.data.error.code).toBe("agent_discovery_failed");
       expect(context.calls.length).toBe(0);
     } finally {
       context.cleanup();

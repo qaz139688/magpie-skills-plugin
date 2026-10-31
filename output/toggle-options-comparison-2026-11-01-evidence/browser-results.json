@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-31",
+  "magpieVersion": "0.1.2405",
+  "samplesPerScenario": 3,
+  "scenarios": {
+    "baseline": {
+      "feedbackMs": [5762.9, 5273.2, 5895.4],
+      "completionMs": [5768.7, 5276.3, 5909.2],
+      "serverMs": [5631, 5180, 5794]
+    },
+    "A-cache": {
+      "feedbackMs": [5593.6, 4536.8, 2539.9],
+      "completionMs": [5596.3, 4541.8, 2540.9],
+      "serverMs": [5477, 4441, 2442]
+    },
+    "B-feedback": {
+      "feedbackMs": [280.3, 282.2, 277.1],
+      "completionMs": [4445.9, 4724.0, 4315.4],
+      "serverMs": [4272, 4546, 4137]
+    },
+    "A+B": {
+      "feedbackMs": [289.8, 296.4, 298.3],
+      "completionMs": [2564.3, 2327.1, 2488.7],
+      "serverMs": [2388, 2147, 2286]
+    },
+    "resident-sidecar": {
+      "feedbackMs": [305.0, 297.3, 289.7],
+      "completionMs": [1462.6, 928.4, 787.5],
+      "serverMs": [1258, 726, 613]
+    }
+  },
+  "rapidDoubleClick": {
+    "baseline": {
+      "secondClickAvailable": false,
+      "final": true,
+      "requests": 1
+    },
+    "B-feedback": {
+      "final": true,
+      "requests": 0
+    },
+    "A+B": {
+      "final": true,
+      "requests": 0
+    },
+    "resident-sidecar": {
+      "final": true,
+      "requests": 0
+    }
+  },
+  "notes": [
+    "Feedback time is measured by automation polling after click and includes automation overhead; it is not a frame-level measurement.",
+    "All scenarios use the same three-skill isolated fixture and the same installed Magpie CLI except the resident sidecar.",
+    "The sidecar remains unsafe for production because the previous isolated test reproduced a lost cross-process update.",
+    "Baseline at 5 mutations includes three main samples and one separate rapid-click check; its server median is computed over all observed API skill mutations."
+  ]
+}

@@ -1,0 +1,563 @@
+{
+  "run": "d71c1586",
+  "sourceCommit": "0414bbeddbfc2028508b610fd1e7c194143454a0",
+  "timings": [
+    {
+      "kind": "worker-first-toggle",
+      "plugins": false,
+      "id": 3,
+      "ok": true,
+      "ms": 363.901,
+      "skills": [
+        {
+          "name": "alpha",
+          "agents": [
+            "codex"
+          ]
+        },
+        {
+          "name": "beta",
+          "agents": []
+        },
+        {
+          "name": "gamma",
+          "agents": []
+        }
+      ],
+      "result": {
+        "changed": [
+          "codex"
+        ],
+        "problems": []
+      },
+      "wallMs": 364.16240000000016
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": false,
+      "wallMs": 312.7393000000002,
+      "nativeMs": 312.718
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": true,
+      "wallMs": 655.5778,
+      "nativeMs": 651.749
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": false,
+      "wallMs": 249.73430000000008,
+      "nativeMs": 249.426
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": true,
+      "wallMs": 773.1940999999997,
+      "nativeMs": 769.4
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": false,
+      "wallMs": 645.1862000000001,
+      "nativeMs": 643.001
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": true,
+      "wallMs": 557.2948999999999,
+      "nativeMs": 556.119
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": false,
+      "wallMs": 2010.9711000000007,
+      "nativeMs": 2009.257
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": true,
+      "wallMs": 914.4290000000001,
+      "nativeMs": 912.95
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": false,
+      "wallMs": 237.60449999999946,
+      "nativeMs": 237.39
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": false,
+      "on": true,
+      "wallMs": 1035.8366999999998,
+      "nativeMs": 1034.467
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": false,
+      "on": false,
+      "wallMs": 1024.0182000000004,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": false,
+      "on": true,
+      "wallMs": 734.9364999999998,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": false,
+      "on": false,
+      "wallMs": 738.7866000000013,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": false,
+      "on": true,
+      "wallMs": 668.4692999999988,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "one-shot-native-toggle",
+      "plugins": false,
+      "wallMs": 419.0447000000022,
+      "nativeMs": 368.771,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "worker-first-toggle",
+      "plugins": true,
+      "id": 3,
+      "ok": true,
+      "ms": 328.544,
+      "skills": [
+        {
+          "name": "alpha",
+          "agents": [
+            "codex"
+          ]
+        },
+        {
+          "name": "beta",
+          "agents": []
+        },
+        {
+          "name": "gamma",
+          "agents": []
+        }
+      ],
+      "result": {
+        "changed": [
+          "codex"
+        ],
+        "problems": []
+      },
+      "wallMs": 328.6670000000013
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": false,
+      "wallMs": 505.3008000000009,
+      "nativeMs": 503.489
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": true,
+      "wallMs": 1839.9640000000036,
+      "nativeMs": 1838.483
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": false,
+      "wallMs": 874.0191999999988,
+      "nativeMs": 873.255
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": true,
+      "wallMs": 427.59920000000056,
+      "nativeMs": 427.253
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": false,
+      "wallMs": 1840.2232000000004,
+      "nativeMs": 1833.911
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": true,
+      "wallMs": 862.6290000000008,
+      "nativeMs": 858.782
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": false,
+      "wallMs": 3008.8768999999993,
+      "nativeMs": 2995.562
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": true,
+      "wallMs": 1608.256699999998,
+      "nativeMs": 1586.846
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": false,
+      "wallMs": 1229.100599999998,
+      "nativeMs": 1224.807
+    },
+    {
+      "kind": "worker-warm-toggle",
+      "plugins": true,
+      "on": true,
+      "wallMs": 682.2209000000003,
+      "nativeMs": 676.541
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": true,
+      "on": false,
+      "wallMs": 1586.7318000000014,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": true,
+      "on": true,
+      "wallMs": 3895.9883000000045,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": true,
+      "on": false,
+      "wallMs": 3312.341099999998,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "installed-cli-toggle",
+      "plugins": true,
+      "on": true,
+      "wallMs": 1713.2342999999964,
+      "stderrBytes": 0
+    },
+    {
+      "kind": "one-shot-native-toggle",
+      "plugins": true,
+      "wallMs": 1119.0349999999962,
+      "nativeMs": 1000.212,
+      "stderrBytes": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "probe refuses a real or unmarked profile",
+      "passed": true
+    },
+    {
+      "name": "worker ping",
+      "passed": true
+    },
+    {
+      "name": "native discovery includes fixture Codex and Claude only",
+      "passed": true,
+      "discoveryMs": 2111.5965,
+      "ids": [
+        "claude",
+        "codex",
+        "dsh"
+      ]
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "no-op skips native sync",
+      "passed": true,
+      "wallMs": 4.828700000000026
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "one-shot wrapper uses identical native code",
+      "passed": true
+    },
+    {
+      "name": "live library and installed Magpie unchanged",
+      "passed": true
+    },
+    {
+      "name": "worker ping",
+      "passed": true
+    },
+    {
+      "name": "native discovery includes fixture Codex and Claude only",
+      "passed": true,
+      "discoveryMs": 485.3041000000012,
+      "ids": [
+        "claude",
+        "codex",
+        "dsh"
+      ]
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "warm native write and distribution",
+      "passed": true
+    },
+    {
+      "name": "no-op skips native sync",
+      "passed": true,
+      "wallMs": 19.785399999993388
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "installed CLI writes the same isolated profile",
+      "passed": true
+    },
+    {
+      "name": "one-shot wrapper uses identical native code",
+      "passed": true
+    },
+    {
+      "name": "live library and installed Magpie unchanged",
+      "passed": true
+    },
+    {
+      "name": "invalid path rejected",
+      "passed": true
+    },
+    {
+      "name": "hidden association retained",
+      "passed": true
+    },
+    {
+      "name": "native link points at library",
+      "passed": true
+    },
+    {
+      "name": "hidden association retained",
+      "passed": true
+    },
+    {
+      "name": "hidden association retained",
+      "passed": true
+    },
+    {
+      "name": "native link points at library",
+      "passed": true
+    },
+    {
+      "name": "native ownership protects user's same-name folder",
+      "passed": true
+    },
+    {
+      "name": "native offHere prevents distribution while retaining association",
+      "passed": true
+    },
+    {
+      "name": "controlled overlap reproduces native cross-process lost update",
+      "passed": true,
+      "helperOK": true,
+      "cliOK": true,
+      "cliMs": 2989.9758999999976,
+      "betaBeforeRelease": [
+        "codex"
+      ],
+      "betaAfterRelease": [],
+      "alphaAfterRelease": [
+        "codex"
+      ]
+    },
+    {
+      "name": "live library and installed Magpie unchanged",
+      "passed": true
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "plain",
+      "dir": "C:/Users/Cc/AppData/Local/Temp/p21-sidecar-probe-20261030/fixtures/d71c1586-plain",
+      "plugins": false,
+      "hidden": false,
+      "copy": false,
+      "offHere": false
+    },
+    {
+      "name": "public-plugins",
+      "dir": "C:/Users/Cc/AppData/Local/Temp/p21-sidecar-probe-20261030/fixtures/d71c1586-public-plugins",
+      "plugins": true,
+      "hidden": false,
+      "copy": false,
+      "offHere": false
+    },
+    {
+      "name": "correctness",
+      "dir": "C:/Users/Cc/AppData/Local/Temp/p21-sidecar-probe-20261030/fixtures/d71c1586-correctness",
+      "plugins": false,
+      "hidden": true,
+      "copy": false,
+      "offHere": false
+    },
+    {
+      "name": "off-here",
+      "dir": "C:/Users/Cc/AppData/Local/Temp/p21-sidecar-probe-20261030/fixtures/d71c1586-off-here",
+      "plugins": false,
+      "hidden": false,
+      "copy": false,
+      "offHere": true
+    },
+    {
+      "name": "cross-process-race",
+      "dir": "C:/Users/Cc/AppData/Local/Temp/p21-sidecar-probe-20261030/fixtures/d71c1586-cross-process-race",
+      "plugins": false,
+      "hidden": false,
+      "copy": false,
+      "offHere": false
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "ok": true,
+      "ms": 0,
+      "event": "before-native-save"
+    }
+  ],
+  "installedVersion": "magpie 0.1.2185",
+  "crossWriter": {
+    "helperOK": true,
+    "cliOK": true,
+    "cliMs": 2989.9758999999976,
+    "betaBeforeRelease": [
+      "codex"
+    ],
+    "betaAfterRelease": [],
+    "alphaAfterRelease": [
+      "codex"
+    ]
+  },
+  "liveLibraryUnchanged": true,
+  "installedMagpieUnchanged": true
+}

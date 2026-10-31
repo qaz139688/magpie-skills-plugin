@@ -1,7 +1,8 @@
 # ADR 0001: Reuse Magpie's Skill Management
 
 Date: 2026-10-29
-Status: accepted architecture; design-only stage, installed-version compatibility pending.
+Status: accepted architecture; baseline installed, experience upgrade
+implemented in the workspace and verified in isolation.
 
 > Follow-up (2026-10-30): the plugin was implemented, installed in the live
 > Magpie profile, and verified to load. The design-only constraints below
@@ -38,7 +39,8 @@ into its Skills tab. See ADR 0005.
 ## Integration candidates and excluded approaches
 
 1. Separate plugin page plus local service, with Magpie handling synchronization:
-   accepted architecture awaiting a compatibility probe.
+   accepted architecture; the baseline was implemented and the experience
+   upgrade was verified in an isolated harness.
 2. Existing public page bridge alone: presently lacks the required Skills
    read/write capabilities; it is not a proven complete implementation.
 3. Modifying the existing Library code, injecting into its UI, or replacing
@@ -57,14 +59,14 @@ report that limitation rather than modifying Library as a workaround.
   arbitrary executable/path input, and never return MCP/provider credentials.
 - Multiple labels per skill are confirmed in ADR 0002. Label persistence and
   identity remain open until existing `SkillGroups` behavior is clarified.
-- The user's latest instruction limits the current stage to detailed design.
-  Do not implement or run further diagnostics. An earlier isolated diagnostic
-  was stopped; production installation and live mutations were not performed.
+- The earlier design-only limitation is historical. The baseline plugin is
+  installed; the experience upgrade is implemented in the workspace and
+  verified in isolation. Live reload/deployment remains separate.
 - Upstream built-in groups allow at most one group per skill. Propose separate
   plugin metadata for multiple labels rather than altering Library groups.
 
 ## Validation gate
 
-After a future explicit request to proceed, demonstrate the selected integration
-path against Magpie 0.1.2012 using an isolated test profile, not the user's live
-skills library. No such tasks should run during the current design-only stage.
+The integration path was exercised in an isolated test profile and harness.
+Existing native projects were not used as test targets. Live reload and
+deployment remain separate actions.
