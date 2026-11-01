@@ -106,7 +106,7 @@ but the distribution surface is narrower:
   loopback port verifies its marker and capability, then reuses it instead of
   failing the plugin load.
 - `package.json` declares repository metadata, discovery keywords and the
-  Magpie page name/icon.
+  Magpie page name/icon, and the project is released under MIT.
 - The `files` allow-list excludes generated `.service-capability-*.js` files,
   so a local capability token cannot be published in an npm tarball.
 

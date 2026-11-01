@@ -198,6 +198,11 @@ GitHub 仓库添加 `magpie-plugin` topic 后，会出现在 Magpie 的插件发
 `magpie-community/plugins` 的 `registry.json` 提交 PR，页面条目使用
 `"kind": "page"`。
 
+## 许可证
+
+本项目使用 MIT License，详见 [LICENSE](LICENSE)。`page/icons/` 下的第三方
+图标仍受各自的许可证和 `NOTICE.md` 约束。
+
 ## 文档
 
 - [文档入口](docs/README.md)
