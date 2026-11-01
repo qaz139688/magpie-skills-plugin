@@ -188,7 +188,7 @@ magpie plugin add 'E:\AI-Workspace\mycc\2-Projects\P21-magpie-skills-plugin'
 - WSL、远程 Agent 和非 Windows 环境不在当前范围。
 - 共享技能目录可能让多个 Agent 同时读取同一个项目链接。
 - 插件项目不会自动导入、同步或接管原生项目。
-- GitHub 安装已在包结构层面验证；当前网络环境未完成真实远端安装复测。
+- GitHub 远端克隆和包结构已验证；尚未在隔离 Profile 执行真实安装复测。
 - 页面升级和本地服务仍需在目标 Magpie 版本上重新打开页面确认。
 
 ## 发布说明
