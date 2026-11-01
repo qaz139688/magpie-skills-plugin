@@ -2,7 +2,10 @@ import { describe, expect, test } from "bun:test";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { startSkillsService } from "../lib/service.mjs";
+import {
+  startOrReuseSkillsService,
+  startSkillsService
+} from "../lib/service.mjs";
 import { tempConfig, writeLibrary, writeSkill } from "./helpers.mjs";
 
 describe("service startup capability", () => {
@@ -101,6 +104,47 @@ describe("service startup capability", () => {
     } finally {
       server?.stop();
       fs.rmSync(plugin, { recursive: true, force: true });
+      config.cleanup();
+    }
+  });
+
+  test("reuses an existing Skills Management service when its port is taken", async () => {
+    const config = tempConfig();
+    const capability = "d".repeat(64);
+    const existing = Bun.serve({
+      hostname: "127.0.0.1",
+      port: 0,
+      fetch(request) {
+        const url = new URL(request.url);
+        if (
+          url.pathname !== "/api/state" ||
+          request.headers.get("x-magpie-page") !== capability
+        ) {
+          return new Response("not found", { status: 404 });
+        }
+        return new Response(JSON.stringify({ ok: true }), {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Skills-Manager": "1"
+          }
+        });
+      }
+    });
+    let reused;
+    try {
+      reused = await startOrReuseSkillsService({
+        port: existing.port,
+        configDir: config.dir,
+        pageCapability: capability,
+        env: {},
+        logger: { error() {} }
+      });
+      expect(reused.reused).toBe(true);
+      expect(reused.server).toBeNull();
+      expect(reused.service.pageCapability).toBe(capability);
+    } finally {
+      reused?.stop();
+      existing.stop(true);
       config.cleanup();
     }
   });

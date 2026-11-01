@@ -3,18 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "description": "An independent Magpie page for labeling and controlling library skills on Windows.",
+  "author": "Ivy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qaz139688/magpie-skills-plugin.git"
+  },
+  "homepage": "https://github.com/qaz139688/magpie-skills-plugin#readme",
+  "bugs": {
+    "url": "https://github.com/qaz139688/magpie-skills-plugin/issues"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "magpie",
+    "skills",
+    "skills-manager"
+  ],
   "type": "module",
   "main": "./index.mjs",
   "exports": "./index.mjs",
   "files": [
+    "README.md",
     "index.mjs",
     "lib",
-    "page"
+    "page",
+    "!page/.service-capability-*.js"
   ],
   "scripts": {
     "test": "bun test"
   },
   "magpie": {
+    "name": "Skills Management",
     "page": {
       "title": "Skills Management",
       "titles": {

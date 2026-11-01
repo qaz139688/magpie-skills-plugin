@@ -8,22 +8,53 @@ Magpie 的独立 Skills 管理插件，面向 Windows 上的个人技能库。
 - 当前版本：`0.1.0`
 - 平台：Windows
 - 默认端口：`127.0.0.1:3487`
-- 最近隔离实验使用的 Magpie CLI：`0.1.2405`（2026-10-31，不代表当前版本保证）
+- 已验证的 Magpie CLI：`0.1.2405`（2026-11-01；低于此版本未验证）
 - 文档入口：[docs/README.md](docs/README.md)
 
-## 当前状态
+## 安装
 
-| 部分 | 状态 | 说明 |
-| --- | --- | --- |
-| 基础插件 | 已安装 | 已注册到真实 Magpie Profile，并完成过页面加载验证 |
-| 标签与搜索 | 已实现 | 多标签、未分类筛选、名称/描述/来源搜索 |
-| 全局 Agent 控制 | 已实现 | 单 Agent 和批量全开/全关，保留隐藏关联 |
-| 开关性能 A＋B | 已实现并隔离验证 | 复用发现缓存、即时反馈和连续点击合并；真实宿主待重新加载 |
-| 技能卡片与来源 | 已实现并隔离验证 | 图标、卡片、来源、头像、复制、目录和浏览器动作 |
-| 原生项目 | 已实现并隔离验证 | 插件页只读展示；成员菜单走受控写入器 |
-| 插件自有项目 | 已实现并隔离验证 | 使用验证过的 Windows Junction |
-| 当前体验升级 | 待真实页面验收 | 真实 Magpie reload 尚未确认，不能等同于线上完成 |
-| 开关性能方案对比 | 隔离实验完成，未接入 | A＋B 较稳；C 最快，但已复现与原生 CLI 并发写入时丢失关联 |
+### 从 GitHub 安装
+
+在 Magpie 的 Plugins 页面打开“发现”，把下面的地址粘贴到安装输入框：
+
+```text
+github:qaz139688/magpie-skills-plugin
+```
+
+也可以在终端执行：
+
+```powershell
+magpie plugin add github:qaz139688/magpie-skills-plugin
+```
+
+安装后重新打开 Magpie，在 **Plugins → Skills Management** 打开页面。首次打开
+页面时，Magpie 会启动插件自带的本地服务；不需要另外安装 Bun。
+
+### 从本机文件夹安装
+
+仅用于开发或调试。不要把包含 `.service-capability-*.js` 的本机目录直接发给
+别人；请通过 GitHub 或 npm 分发。
+
+```powershell
+magpie plugin add 'E:\path\to\magpie-skills-plugin'
+```
+
+### 环境要求
+
+- Windows
+- Magpie；插件页面由 Magpie 内置运行时启动
+- 需要手动运行 CLI 时使用 PowerShell 7
+
+## 功能概览
+
+- 按全部、未分类或标签浏览技能，支持多标签。
+- 只显示当前 Windows 已安装且支持 Skills 的 Agent。
+- 单 Agent 开关，以及当前可用 Agent 的全开/全关。
+- 技能名称复制、Library 目录打开和来源网页打开。
+- 展示 Magpie 原生项目，并通过技能菜单做窄范围成员变更。
+- 注册插件自有项目，用 Windows Junction 增加项目级技能。
+
+详细状态和验证记录见 [03 - 状态与迭代计划](docs/03-状态与迭代计划.md)。
 
 ## 项目定位
 
@@ -86,16 +117,10 @@ docs/                  主文档、详细设计、ADR 和实施记录
 GLOSSARY.md            统一术语
 ```
 
-## 快速开始
+## 开发与验证
 
-### 环境要求
-
-- Windows
-- PowerShell 7
-- Bun
-- Magpie CLI
-
-### 检查当前工作区
+开发环境需要 Windows、PowerShell 7、Bun 和 Magpie CLI。安装插件本身不需要
+单独安装 Bun。
 
 ```powershell
 Set-Location 'E:\AI-Workspace\mycc\2-Projects\P21-magpie-skills-plugin'
@@ -104,25 +129,32 @@ bun test
 git diff --check
 ```
 
-### 隔离视觉验证
+隔离视觉验证：
 
 ```powershell
 bun test/visual-harness.mjs
 ```
 
-该命令使用临时配置和临时项目，不会修改真实 Magpie 项目。视觉验收时再按需要
-打开它输出的本地地址。
+该命令使用临时配置和临时项目，不会修改真实 Magpie 项目。
 
-### 安装或重装
-
-只有明确需要更新真实 Profile 时才执行：
+本机开发安装或重装：
 
 ```powershell
-& 'E:\magpie-windows-amd64.exe' plugin add 'E:\AI-Workspace\mycc\2-Projects\P21-magpie-skills-plugin'
+magpie plugin add 'E:\AI-Workspace\mycc\2-Projects\P21-magpie-skills-plugin'
 ```
 
-安装后仍需从 Magpie 的 Plugins 入口打开页面，确认真实页面、主题和能力脚本
-正常。安装命令本身不能证明页面已完成验收。
+安装命令本身不能证明页面已完成验收；仍需从 Magpie 的 Plugins 入口打开页面，
+确认真实页面、主题和本地服务正常。
+
+## 使用与卸载
+
+- 默认本地地址是 `127.0.0.1:3487`；如果端口被占用，可在 Magpie 的插件选项中
+  设置 `port`，或关闭占用该端口的旧 Magpie 实例。
+- 标签、自定义来源和插件项目记录保存在 Magpie 配置目录下的
+  `skills-manager/`。删除插件前建议先备份这个目录。
+- 卸载时在 Magpie 的 Plugins 页面移除或关闭插件。卸载不会自动删除上述元数据；
+  确认不再需要后，再由你手动清理。
+- 页面只能通过本机回环地址访问；写操作需要页面 capability 和短期会话。
 
 ## 数据与安全边界
 
@@ -156,7 +188,15 @@ bun test/visual-harness.mjs
 - WSL、远程 Agent 和非 Windows 环境不在当前范围。
 - 共享技能目录可能让多个 Agent 同时读取同一个项目链接。
 - 插件项目不会自动导入、同步或接管原生项目。
-- 当前体验升级已完成隔离验证，但真实 Magpie 页面重新加载和正式部署仍待确认。
+- GitHub 安装已在包结构层面验证；当前网络环境未完成真实远端安装复测。
+- 页面升级和本地服务仍需在目标 Magpie 版本上重新打开页面确认。
+
+## 发布说明
+
+GitHub 仓库添加 `magpie-plugin` topic 后，会出现在 Magpie 的插件发现页
+“非官方插件 · GitHub”区域。若要进入社区推荐列表，再向
+`magpie-community/plugins` 的 `registry.json` 提交 PR，页面条目使用
+`"kind": "page"`。
 
 ## 文档
 

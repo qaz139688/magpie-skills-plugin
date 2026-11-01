@@ -94,6 +94,22 @@ CORS only for a sandboxed Magpie page. Tokens are kept in headers, not URLs.
 Persisted capability and bootstrap files use Windows ACLs restricted to the
 current user; startup fails closed if the ACL cannot be applied.
 
+### GitHub distribution
+
+The GitHub-installed package uses the same plugin code as the local workspace,
+but the distribution surface is narrower:
+
+- `index.mjs` exports only the default `{ id, server }` plugin object.
+- The server reads the Magpie configuration directory from `input.directory`
+  instead of relying on the process working directory.
+- A second host that finds an existing Skills Management service on the same
+  loopback port verifies its marker and capability, then reuses it instead of
+  failing the plugin load.
+- `package.json` declares repository metadata, discovery keywords and the
+  Magpie page name/icon.
+- The `files` allow-list excludes generated `.service-capability-*.js` files,
+  so a local capability token cannot be published in an npm tarball.
+
 ## Verification completed
 
 The following baseline checks were recorded at the original delivery:
@@ -161,6 +177,9 @@ and unverified links.
   browser.
 - Startup check: the service published a runtime capability file outside
   public static routes; the exact capability authorized state reads.
+- GitHub distribution check: `npm pack --dry-run` produced 60 files without a
+  `.service-capability-*.js` file; `index.mjs` imported with only a `default`
+  export.
 
 The live Magpie page has not yet been restarted or verified against the
 upgrade. Opening the existing live page before a Magpie/plugin restart may
