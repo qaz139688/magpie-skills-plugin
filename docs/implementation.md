@@ -184,3 +184,15 @@ and unverified links.
 The live Magpie page has not yet been restarted or verified against the
 upgrade. Opening the existing live page before a Magpie/plugin restart may
 still show the prior implementation.
+
+## Process-loop fix (2026-11-02)
+
+- Service startup no longer starts `magpie ls`; the page explicitly requests
+  `POST /api/discovery/refresh` on its first load.
+- `GET /api/state` now only reads the current projection and never waits for
+  agent discovery.
+- Port reuse probes `GET /api/health` with a 1.5 second timeout; the reuse
+  path does not start a second discovery.
+- `bun test`: 32 passing tests across 9 files.
+- Isolated visual harness: the page loaded and displayed 12 agents, confirming
+  the explicit first-refresh path.

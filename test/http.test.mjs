@@ -41,6 +41,16 @@ describe("loopback HTTP service", () => {
       expect(response.headers.get("access-control-allow-origin")).toBe("null");
       expect((await response.json()).skills[0].name).toBe("pdf");
 
+      const health = await fetch(`${base}/api/health`, {
+        headers: {
+          Origin: "null",
+          "X-Magpie-Page": service.pageCapability
+        }
+      });
+      expect(health.status).toBe(200);
+      expect(health.headers.get("x-skills-manager")).toBe("1");
+      expect((await health.json()).service).toBe("magpie-skills-manager");
+
       const preflight = await fetch(`${base}/api/labels`, {
         method: "OPTIONS",
         headers: {

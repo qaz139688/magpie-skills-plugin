@@ -180,7 +180,7 @@ magpie plugin add 'E:\AI-Workspace\mycc\2-Projects\P21-magpie-skills-plugin'
 - 原生项目成员写入、同步失败回滚和隐藏归属保留。
 - 插件项目 Junction 生命周期、冲突保护和项目只读状态。
 
-最近一次工作区验证：`bun test` 通过，30 个测试、9 个测试文件。
+最近一次工作区验证：`bun test` 通过，32 个测试、9 个测试文件。
 
 ## 已知边界
 

@@ -1596,7 +1596,11 @@
     for (let attempt = 0; attempt < 9; attempt += 1) {
       try {
         await ensureSession();
-        const data = await api("api/state", { retry: false });
+        const initial = await api("api/state", { retry: false });
+        const data =
+          initial.discovery?.state === "loading"
+            ? await api("api/discovery/refresh", { method: "POST", body: {} })
+            : initial;
         setData(data);
         return;
       } catch (error) {

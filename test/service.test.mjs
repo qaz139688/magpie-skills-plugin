@@ -98,6 +98,30 @@ describe("skills manager service", () => {
     }
   });
 
+  test("does not run discovery until the page explicitly refreshes it", async () => {
+    const context = setup();
+    try {
+      expect(context.discovery.refreshCalls).toHaveLength(0);
+
+      const state = await makeRequest(context.service, { path: "/api/state" });
+      expect(state.response.status).toBe(200);
+      expect(context.discovery.refreshCalls).toHaveLength(0);
+
+      const session = await sessionFor(context.service);
+      const refreshed = await makeRequest(context.service, {
+        path: "/api/discovery/refresh",
+        method: "POST",
+        session,
+        body: {}
+      });
+      expect(refreshed.response.status).toBe(200);
+      expect(context.discovery.refreshCalls).toHaveLength(1);
+      expect(context.discovery.refreshCalls[0]).toEqual({ force: true });
+    } finally {
+      context.cleanup();
+    }
+  });
+
   test("global off and on preserve hidden associations", async () => {
     const context = setup();
     try {

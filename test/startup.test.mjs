@@ -111,13 +111,18 @@ describe("service startup capability", () => {
   test("reuses an existing Skills Management service when its port is taken", async () => {
     const config = tempConfig();
     const capability = "d".repeat(64);
+    let stateRequests = 0;
     const existing = Bun.serve({
       hostname: "127.0.0.1",
       port: 0,
       fetch(request) {
         const url = new URL(request.url);
+        if (url.pathname === "/api/state") {
+          stateRequests += 1;
+          return new Response("unexpected state probe", { status: 500 });
+        }
         if (
-          url.pathname !== "/api/state" ||
+          url.pathname !== "/api/health" ||
           request.headers.get("x-magpie-page") !== capability
         ) {
           return new Response("not found", { status: 404 });
@@ -142,6 +147,7 @@ describe("service startup capability", () => {
       expect(reused.reused).toBe(true);
       expect(reused.server).toBeNull();
       expect(reused.service.pageCapability).toBe(capability);
+      expect(stateRequests).toBe(0);
     } finally {
       reused?.stop();
       existing.stop(true);
