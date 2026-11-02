@@ -108,3 +108,17 @@ Magpie 配置时使用 `magpie-setup` 技能。
 - 推送后必须核对本地 `git rev-parse HEAD` 与
   `git ls-remote origin refs/heads/main` 一致，并确认远端提交内容。直接推送失败时，
   保留本地提交，再使用已认证的 `gh` 或 GitHub API 重试，不得删除提交或强推。
+
+## 本地版与 GitHub 分发版
+
+- 当前工作区是本地开发/自用版本，`origin/main` 是对外分发版本；两者可能暂时
+  存在差异。未提交或未明确决定公开的本地改动，不自动视为 GitHub 版本。
+- 推送前先查看 `git status --short`、`git diff --name-only` 和
+  `git diff origin/main --`，逐项确认哪些改动属于 GitHub 版本。只暂存明确的
+  文件，禁止用 `git add -A` 把本地专属改动一起带走。
+- 本机配置、绝对路径、临时文件和生成文件不得进入 GitHub 提交，包括
+  `page/.service-capability-*`、临时 `.tmp` 文件和测试产生的本机证据。
+- 本地专属改动如果决定公开，先在干净克隆或隔离安装中验证，再同步 README、
+  `docs/02-架构与执行说明.md` 和相关状态文档，最后再提交推送。
+- GitHub 版本必须保持可通过 `github:owner/repo` 直接安装；不要依赖本机目录、
+  本机 Magpie 配置或未提交的本地代码。
