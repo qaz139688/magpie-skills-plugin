@@ -109,10 +109,10 @@ Magpie 配置时使用 `magpie-setup` 技能。
   `git ls-remote origin refs/heads/main` 一致，并确认远端提交内容。直接推送失败时，
   保留本地提交，再使用已认证的 `gh` 或 GitHub API 重试，不得删除提交或强推。
 
-## 本地版与 GitHub 分发版
+## 本地改动与 GitHub 分发
 
-- 当前工作区是本地开发/自用版本，`origin/main` 是对外分发版本；两者可能暂时
-  存在差异。未提交或未明确决定公开的本地改动，不自动视为 GitHub 版本。
+- `origin/main` 是对外分发版本，当前工作区可能包含尚未提交或尚未决定公开的
+  本地改动。未提交或未明确决定公开的改动，不自动视为 GitHub 版本。
 - 推送前先查看 `git status --short`、`git diff --name-only` 和
   `git diff origin/main --`，逐项确认哪些改动属于 GitHub 版本。只暂存明确的
   文件，禁止用 `git add -A` 把本地专属改动一起带走。
